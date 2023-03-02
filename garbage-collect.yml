@@ -1,0 +1,7 @@
+---
+- hosts: nix
+  become: true
+  gather_facts: no
+  tasks:
+    - name: Collect garbage
+      shell: systemctl start --wait nix-clean-result.service && nix-collect-garbage -d

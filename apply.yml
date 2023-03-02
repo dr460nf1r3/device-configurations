@@ -1,0 +1,7 @@
+---
+- hosts: nix
+  become: true
+  gather_facts: no
+  tasks:
+    - name: Build system
+      shell: nixos-rebuild switch

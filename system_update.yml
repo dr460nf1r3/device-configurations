@@ -1,0 +1,17 @@
+---
+- hosts: nix
+  gather_facts: no
+  become: true
+  tasks:
+    - name: Download flake lock to repo
+      fetch:
+        src: "/etc/nixos/flake.lock"
+        dest: "nix/flake.lock"
+        flat: true
+      run_once: true
+    - name: Upload flake lock to hosts
+      synchronize:
+        src: "nix/flake.lock"
+        dest: "/etc/nixos/flake.lock"
+    - name: Update and build system
+      shell: nixos-rebuild boot
