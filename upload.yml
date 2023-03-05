@@ -1,0 +1,11 @@
+---
+- hosts: nix
+  become: true
+  gather_facts: no
+  tasks:
+    - name: Copy static configurations to target directory
+      synchronize:
+        src: "nix/"
+        dest: /etc/nixos/
+      #  rsync_opts:
+      #    - "--exclude=/"

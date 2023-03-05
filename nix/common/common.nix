@@ -4,9 +4,9 @@
   # Network (NetworkManager)
   networking = {
     networkmanager = {
+      dns = "systemd-resolved";
       enable = true;
       wifi.backend = "iwd";
-      dns = "systemd-resolved";
     };
     # Disable non-NetworkManager
     useDHCP = false;
@@ -21,8 +21,8 @@
 
   # NextDNS
   services.nextdns = {
-    enable = true;
     arguments = [ "-config" "ab21b4" ];
+    enable = true;
   };
 
   # Zerotier network to connect the devices
@@ -34,14 +34,14 @@
   ## Enable BBR & cake
   boot.kernelModules = [ "tcp_bbr" ];
   boot.kernel.sysctl = {
-    "net.ipv4.tcp_congestion_control" = "bbr";
-    "net.core.default_qdisc" = "cake";
     "kernel.nmi_watchdog" = 0;
     "kernel.printks" = "3 3 3 3";
     "kernel.sched_cfs_bandwidth_slice_us" = 3000;
     "kernel.sysrq" = 1;
     "kernel.unprivileged_userns_clone" = 1;
+    "net.core.default_qdisc" = "cake";
     "net.core.rmem_max" = 2500000;
+    "net.ipv4.tcp_congestion_control" = "bbr";
     "net.ipv4.tcp_fin_timeout" = 5;
     "vm.swappiness" = 133;
   };
@@ -184,15 +184,22 @@
   environment = {
     # Packages the system needs
     systemPackages = with pkgs; [
+      bind
       btop
+      cached-nix-shell
+      curl
       exa
       jq
       killall
+      lynis
       micro
+      nettools
+      nmap
       python3
+      traceroute
       ugrep
       wget
-      curl
+      whois
     ];
     # Increase Mosh timeout
     variables = { MOSH_SERVER_NETWORK_TMOUT = "604800"; };
@@ -220,10 +227,10 @@
     };
     settings = {
       # Allow using flakes
-      experimental-features = [ "nix-command" "flakes" ];
       auto-optimise-store = true;
-      trusted-users = [ "root" "nico" ];
+      experimental-features = [ "nix-command" "flakes" ];
       max-jobs = "auto";
+      trusted-users = [ "root" "nico" ];
     };
     nixPath = [ "nixpkgs=${sources.nixpkgs}" ];
   };

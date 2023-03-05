@@ -1,14 +1,14 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   # Enable sound with Pipewire
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
-    enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
-    pulse.enable = true;
+    enable = true;
     media-session.enable = false;
+    pulse.enable = true;
     systemWide = false;
     wireplumber.enable = true;
   };
@@ -37,9 +37,9 @@
   };
 
   # Microcode and firmware updates
-  services.fwupd.enable = true;
-  hardware.cpu.intel.updateMicrocode = true;
   hardware.cpu.amd.updateMicrocode = true;
+  hardware.cpu.intel.updateMicrocode = true;
+  services.fwupd.enable = true;
 
   # Kernel paramters & settings
   boot.kernelParams = [
@@ -64,40 +64,40 @@
   # List the packages I need
   environment.systemPackages = with pkgs; [
     acpi
-    ffmpegthumbnailer
-    lm_sensors
-    obs-studio-wrapped
-    spotify
-    tdesktop
-    usbutils
-    xdg-utils
-    teamviewer
-    librewolf
-    thunderbird
-    nextcloud-client
-    neofetch
-    libreoffice-fresh
-    spot
-    helvum
-    spicetify-cli
-    spotdl
-    libva-utils
-    ugrep
     aspell
-    aspellDicts.en
     aspellDicts.de
+    aspellDicts.en
+    ffmpegthumbnailer
+    gimp
+    helvum
     hunspell
     hunspellDicts.de_DE
     hunspellDicts.en_US
     inkscape
-    gimp
     jetbrains-mono
-    ungoogled-chromium
+    libreoffice-fresh
+    librewolf
+    libva-utils
+    lm_sensors
     lutris
     mangohud
-    wine-staging
+    neofetch
+    nextcloud-client
+    obs-studio-wrapped
+    spicetify-cli
+    spot
+    spotdl
+    spotify
+    tdesktop
+    teamviewer
+    thunderbird
+    ugrep
+    ungoogled-chromium
+    usbutils
     vulkan-tools
+    wine-staging
     winetricks
+    xdg-utils
   ];
 
   # Override obs-studio with plugins
@@ -142,9 +142,9 @@
     fonts = with pkgs; [
       fira
       fira-code
-      jetbrains-mono
       font-awesome_4
       font-awesome_5
+      jetbrains-mono
       noto-fonts
       noto-fonts-cjk
       open-fonts
@@ -154,9 +154,9 @@
     fontconfig = {
       cache32Bit = true;
       defaultFonts = {
-        serif = [ "Fira" ];
-        sansSerif = [ "Fira" ];
         monospace = [ "Jetbrains Mono" ];
+        sansSerif = [ "Fira" ];
+        serif = [ "Fira" ];
       };
     };
   };

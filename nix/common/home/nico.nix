@@ -2,31 +2,20 @@
 
 {
   # Always needed home-manager settings - don't touch!
-  home.username = "nico";
   home.homeDirectory = "/home/nico";
   home.stateVersion = "22.11";
+  home.username = "nico";
 
   # Personally used packages
   home.packages = with pkgs; [
-    nmap
-    nettools
-    bind
-    whois
-    traceroute
-    lynis
-    gnomeExtensions.user-themes
-    gnomeExtensions.tray-icons-reloaded
-    gnomeExtensions.tray-icons-reloaded
-    gnomeExtensions.vitals
     adwaita-qt
-    gnomeExtensions.dash-to-panel
     gnomeExtensions.burn-my-windows
-    gnomeExtensions.unite
-    gnomeExtensions.sound-output-device-chooser
-    gnomeExtensions.space-bar
-    palenight-theme
     gnomeExtensions.dash-to-dock
     gnomeExtensions.gsconnect
+    gnomeExtensions.tray-icons-reloaded
+    gnomeExtensions.unite
+    gnomeExtensions.user-themes
+    gnomeExtensions.vitals
   ];
 
   # Application user configuration
@@ -150,58 +139,28 @@
   };
   dconf.enable = true;
   dconf.settings = {
-    # ...                                                                                                                               
     "org/gnome/shell" = {
       disable-user-extensions = false;
-
-      # `gnome-extensions list` for a list                                                                                              
+      # To-be enabled extensions                                                                                        
       enabled-extensions = [
-        "user-theme@gnome-shell-extensions.gcampax.github.com"
-        "trayIconsReloaded@selfmade.pl"
         "Vitals@CoreCoding.com"
-        "dash-to-panel@jderose9.github.com"
-        "sound-output-device-chooser@kgshank.net"
-        "space-bar@luchrioh"
+        "trayIconsReloaded@selfmade.pl"
+        "user-theme@gnome-shell-extensions.gcampax.github.com"
       ];
     };
-    "org/gnome/desktop/interface" = { gtk-theme = "Adwaita-dark"; };
   };
 
-  gtk = {
-    enable = true;
 
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
-
-    cursorTheme = {
-      name = "Numix-Cursor";
-      package = pkgs.numix-cursor-theme;
-    };
-
-    gtk3.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1                                                                                             
-      '';
-    };
-
-    gtk4.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1                                                                                             
-      '';
-    };
-  };
-
+  # Configure Chromium for hardware acceleration & dark mode
   programs.chromium.commandLineArgs = [
-    "--ignore-gpu-blocklist"
+    "--enable-features=VaapiVideoDecoder"
+    "--enable-features=WebUIDarkMode"
     "--enable-gpu-rasterization"
     "--enable-zero-copy"
-    "--enable-features=VaapiVideoDecoder"
+    "--force-dark-mode"
+    "--ignore-gpu-blocklist"
     "--ignore-gpu-blocklist"
     "--ozone-platform-hint=auto"
-    "--force-dark-mode"
-    "--enable-features=WebUIDarkMode"
   ];
   programs.chromium.extensions =
     [{ id = "cjpalhdlnbpafiamejdnhcphjbkeiagm "; }];
@@ -232,20 +191,6 @@
       # Expect mouse
       set -g mouse off
     '';
-  };
-
-    # Make sure we're using the english ones.
-    userDirs = {
-      enable = true;
-      desktop = "$HOME/Desktop";
-      documents = "$HOME/Documents";
-      download = "$HOME/Downloads";
-      pictures = "$HOME/Pictures";
-      publicShare = "$HOME/Public";
-      templates = "$HOME/Templates";
-      videos = "$HOME/Videos";
-      music = "$HOME/Music";
-    };
   };
 
   programs.mpv = {
@@ -309,9 +254,11 @@
       background_alpha = "0.05";
       battery = true;
       cpu_temp = true;
+      engine_version = true;
       font_size = 17;
       fps_limit = 60;
       gl_vsync = 0;
+      gpu_name = true;
       gpu_temp = true;
       io_read = true;
       io_write = true;
@@ -320,11 +267,8 @@
       vram = true;
       vsync = 1;
       vulkan_driver = true;
-      gpu_name = true;
-      engine_version = true;
       width = 260;
       wine = true;
     };
   };
-
 }

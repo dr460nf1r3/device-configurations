@@ -1,29 +1,32 @@
 { pkgs, ... }: {
   # List packages
   environment.systemPackages = with pkgs; [
-    keybase-gui
-    xdg-utils
-    teamviewer
-    hugo
-    bind.dnsutils # "dig"
-    heroku
-    gitkraken
     ansible
+    bind.dnsutils # "dig"
+    gitkraken
+    heroku
+    hugo
+    jdk8
+    jetbrains.pycharm-professional
+    keybase-gui
     logstalgia # Chaotic
+    nixfmt
+    nixos-generators
     shellcheck # Bash-dev 
     shfmt # Bash-dev
-    yarn # Front-dev
-    jdk8
-    vscode
-    jetbrains.pycharm-professional
+    teamviewer
+    termius
     ventoy-bin-full
     vmware-workstation
-    termius
+    vscode
+    wireshark
+    xdg-utils
+    yarn # Front-dev
   ];
 
   # Enable services (automatically includes their apps' packages)
-  services.keybase.enable = true;
   services.kbfs.enable = true;
+  services.keybase.enable = true;
 
   # Disable nixos-containers (conflicts with virtualisation.containers)
   boot.enableContainers = false;

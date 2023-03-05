@@ -29,6 +29,10 @@
     device = "zroot/data/persistent";
     fsType = "zfs";
   };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/C2C3-69F1";
+    fsType = "vfat";
+  };
 
   # ZFS doesn't support SWAP
   swapDevices = [ ];

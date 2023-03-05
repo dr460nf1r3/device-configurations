@@ -13,14 +13,14 @@
   # My user
   users.users.nico = {
     extraGroups = [
-      "wheel"
+      "adbusers"
+      "audio"
+      "disk"
       "docker"
       "networkmanager"
-      "disk"
-      "audio"
-      "video"
       "systemd-journal"
-      "adbusers"
+      "video"
+      "wheel"
     ];
     home = "/home/nico";
     isNormalUser = true;

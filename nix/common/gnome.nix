@@ -15,23 +15,45 @@
   # Exclude bloated packages
   environment.gnome.excludePackages = (with pkgs; [ gnome-photos gnome-tour ])
     ++ (with pkgs.gnome; [
+      atomix # puzzle game
       cheese # webcam tool
+      epiphany # web browser
+      evince # document viewer
+      geary # email reader
+      gedit # text editor
+      gnome-characters
+      gnome-maps
       gnome-music
       gnome-terminal
-      gedit # text editor
-      epiphany # web browser
-      geary # email reader
-      evince # document viewer
-      gnome-characters
-      totem # video player
-      tali # poker game
-      iagno # go game
-      hitori # sudoku game
-      atomix # puzzle game
-      yelp
-      gnome-maps
       gnome-weather
+      hitori # sudoku game
+      iagno # go game
+      tali # poker game
+      totem # video player
+      yelp
     ]);
+
+  # Style the desktop
+  stylix.image = pkgs.fetchurl {
+    url = "https://gitlab.com/garuda-linux/themes-and-settings/artwork/garuda-wallpapers/-/raw/ac03a670062e80a2c0306bc4c8dd3ae485b4566c/src/garuda-wallpapers/Malefor.jpg";
+    sha256 = "865b778723caaa7f3c26bcb2a9e8048257fc4eef2b90fbf788044f22e618cb64";
+  };
+  stylix.polarity = "dark";
+  stylix.fonts = {
+    serif = config.stylix.fonts.sansSerif;
+    sansSerif = {
+      package = pkgs.fira;
+      name = "Fira";
+    };
+    monospace = {
+      package = pkgs.jetbrains-mono;
+      name = "Jetbrains Mono";
+    };
+    emoji = {
+      package = pkgs.noto-fonts-emoji;
+      name = "Noto Color Emoji";
+    };
+  };
 
   # Additional GNOME packages not included by default
   environment.systemPackages = with pkgs; [ gnome.gnome-tweaks ];

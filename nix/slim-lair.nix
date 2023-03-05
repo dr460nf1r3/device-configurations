@@ -1,11 +1,11 @@
 { config, pkgs, lib, ... }: {
   # Individual settings
   imports = [
-    ./hardware-configuration/slim-lair.nix
     ./common/common.nix
     ./common/desktops.nix
-    ./common/gnome.nix
     ./common/development.nix
+    ./common/gnome.nix
+    ./hardware-configuration/slim-lair.nix
   ];
 
   # Use the systemd-boot EFI boot loader
@@ -19,19 +19,31 @@
       efi.canTouchEfiVariables = true;
     };
     supportedFilesystems = [ "zfs" ];
-    zfs.requestEncryptionCredentials = false;
+    zfs = {
+      enableUnstable = true;
+      requestEncryptionCredentials = false;
+    };
     # /tmp on tmpfs
     tmpOnTmpfs = true;
     tmpOnTmpfsSize = "30%";
     # The new AMD Pstate driver & needed modules
-    kernelModules = [ "acpi_call" "amdgpu" "amd-pstate=passive" ];
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
+    kernelModules = [ "acpi_call" "amdgpu" "amd-pstate=passive" ];
+    kernelPackages = pkgs.linuxPackages_xanmod_latest;
     kernelParams = [ "initcall_blacklist=acpi_cpufreq_init" ];
+  };
+
+  # Creates a second boot entry with LTS kernel and stable ZFS
+  specialisation.safe.configuration = {
+    boot.kernelPackages = lib.mkForce pkgs.linuxPackages;
+    boot.zfs.enableUnstable = lib.mkForce false;
+    system.nixos.tags = [ "lts" "zfs-stable" ];
   };
 
   # Network configuration - id for ZFS
   networking.hostName = "slim-lair";
-  networking.hostId = (builtins.substring 0 8 (builtins.readFile "/etc/machine-id"));
+  networking.hostId =
+    (builtins.substring 0 8 (builtins.readFile "/etc/machine-id"));
 
   # SSD
   services.fstrim.enable = true;

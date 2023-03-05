@@ -1,0 +1,4 @@
+# Base values
+actual_hostname: tv-nixos
+ansible_host: tv-nixos
+ansible_port: 22

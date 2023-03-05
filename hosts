@@ -4,3 +4,5 @@ ansible_user = ansible
 sftp_enabled = true
 
 [nix]
+slim-lair
+tv-nixos

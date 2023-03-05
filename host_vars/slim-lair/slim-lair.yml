@@ -1,0 +1,4 @@
+# Base values
+actual_hostname: slim-lair
+ansible_host: slim-lair
+ansible_port: 22
