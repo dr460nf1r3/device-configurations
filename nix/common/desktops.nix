@@ -91,6 +91,7 @@
     tdesktop
     teamviewer
     thunderbird
+    tor-browser-bundle-bin
     ugrep
     ungoogled-chromium
     usbutils
@@ -98,6 +99,8 @@
     wine-staging
     winetricks
     xdg-utils
+    yubikey-personalization
+    yubioath-flutter
   ];
 
   # Override obs-studio with plugins
@@ -116,15 +119,30 @@
     };
   in [ thisConfigsOverlay ];
 
-  # Special apps (requires more than their package to work)
+  # Special apps
   programs.adb.enable = true;
   programs.gamemode.enable = true;
   programs.steam = { enable = true; };
+
+  # Wayland for Android apps
+  virtualisation.waydroid.enable = true;
 
   # Automatically tune nice levels
   services.ananicy = {
     enable = true;
     package = pkgs.ananicy-cpp;
+  };
+  # For out-of-box gaming with Heroic Game Launcher
+  services.flatpak.enable = true;
+
+  # Let me use my Yubikey
+  hardware.gpgSmartcards.enable = true;
+  services.udev.packages = [ pkgs.yubikey-personalization ];
+  services.pcscd.enable = true;
+  security.pam.yubico = {
+    enable = true;
+    debug = true;
+    mode = "challenge-response";
   };
 
   # 90% ZRAM as swap
@@ -133,23 +151,18 @@
     memoryPercent = 90;
   };
 
-  # For out-of-box gaming with Heroic Game Launcher
-  services.flatpak.enable = true;
-
   # Fonts
   fonts = {
-    enableDefaultFonts = true; # Those fonts you expect every distro to have
+    # Those fonts you expect every distro to have
+    enableDefaultFonts = true;
     fonts = with pkgs; [
       fira
-      fira-code
       font-awesome_4
       font-awesome_5
       jetbrains-mono
       noto-fonts
       noto-fonts-cjk
-      open-fonts
       roboto
-      ubuntu_font_family
     ];
     fontconfig = {
       cache32Bit = true;

@@ -26,6 +26,8 @@
     # /tmp on tmpfs
     tmpOnTmpfs = true;
     tmpOnTmpfsSize = "30%";
+    # Needed to get the touchpad to work
+    blacklistedKernelModules = [ "elan_i2c" ];
     # The new AMD Pstate driver & needed modules
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
     kernelModules = [ "acpi_call" "amdgpu" "amd-pstate=passive" ];

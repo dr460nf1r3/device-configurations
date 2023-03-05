@@ -1,4 +1,12 @@
-{ pkgs, lib, config, sources, ... }: {
+{ pkgs, lib, config, sources, ... }:
+let
+  base16-schemes = pkgs.fetchFromGitHub {
+    owner = "tinted-theming";
+    repo = "base16-schemes";
+    rev = "cf6bc89";
+    sha256 = "U9pfie3qABp5sTr3M9ga/jX8C807FeiXlmEZnC4ZM58=";
+  };
+in {
   # Enable GNOME desktop environment
   services.xserver = {
     enable = true;
@@ -30,10 +38,11 @@
       iagno # go game
       tali # poker game
       totem # video player
-      yelp
+      yelp # useless help app
     ]);
 
   # Style the desktop
+  stylix.base16Scheme = "${base16-schemes}/gruvbox-dark-soft.yaml";
   stylix.image = pkgs.fetchurl {
     url = "https://gitlab.com/garuda-linux/themes-and-settings/artwork/garuda-wallpapers/-/raw/ac03a670062e80a2c0306bc4c8dd3ae485b4566c/src/garuda-wallpapers/Malefor.jpg";
     sha256 = "865b778723caaa7f3c26bcb2a9e8048257fc4eef2b90fbf788044f22e618cb64";
