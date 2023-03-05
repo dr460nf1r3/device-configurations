@@ -1,31 +1,55 @@
 { pkgs, lib, config, sources, ... }: {
   imports = [ ./hardening.nix ./users.nix ];
 
-  # Network stuff
+  # Network (NetworkManager)
   networking = {
-    nameservers = [ "127.0.0.1" ];
-    networkmanager = { wifi.backend = "iwd"; };
-    usePredictableInterfaceNames = true;
-    useHostResolvConf = true;
+    networkmanager = {
+      enable = true;
+      wifi.backend = "iwd";
+      dns = "systemd-resolved";
+    };
+    # Disable non-NetworkManager
+    useDHCP = false;
+  };
+
+  # DNS
+  services.resolved = {
+    enable = true;
+    # Use the local NextDNS server
+    fallbackDns = [ "127.0.0.1" ];
   };
 
   # NextDNS
-  services.nextdns.enable = true;
-  services.nextdns.arguments = [ "-config" "ab21b4" ];
+  services.nextdns = {
+    enable = true;
+    arguments = [ "-config" "ab21b4" ];
+  };
+
+  # Zerotier network to connect the devices
+  services.zerotierone = {
+    enable = true;
+    joinNetworks = [ "a84ac5c10a715aa7" ];
+  };
 
   ## Enable BBR & cake
   boot.kernelModules = [ "tcp_bbr" ];
   boot.kernel.sysctl = {
     "net.ipv4.tcp_congestion_control" = "bbr";
     "net.core.default_qdisc" = "cake";
+    "kernel.nmi_watchdog" = 0;
+    "kernel.printks" = "3 3 3 3";
+    "kernel.sched_cfs_bandwidth_slice_us" = 3000;
+    "kernel.sysrq" = 1;
+    "kernel.unprivileged_userns_clone" = 1;
+    "net.core.rmem_max" = 2500000;
+    "net.ipv4.tcp_fin_timeout" = 5;
+    "vm.swappiness" = 133;
   };
-  boot.cleanTmpDir = true;
 
   # More modern stage 1 in boot
   boot.initrd.systemd.enable = true;
 
-  # Locales & timezone
-  time.timeZone = "Europe/Berlin";
+  # Locales
   i18n = {
     extraLocaleSettings = {
       LC_ADDRESS = "de_DE.UTF-8";
@@ -43,11 +67,15 @@
       [ "en_GB.UTF-8/UTF-8" "en_US.UTF-8/UTF-8" "de_DE.UTF-8/UTF-8" ];
   };
 
+  # Timezone
+  time.timeZone = "Europe/Berlin";
+
   # X11
   services.xserver = {
     layout = "de";
     xkbVariant = "";
   };
+
   # Console setup
   console = {
     font = "Lat2-Terminus16";
@@ -58,47 +86,19 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.nico = import ./home/nico.nix;
   };
 
   # We want to be insulted on wrong passwords
-  security.sudo.package = pkgs.sudo.override { withInsults = true; };
-  security.sudo.wheelNeedsPassword = false;
+  security.sudo = {
+    package = pkgs.sudo.override { withInsults = true; };
+    wheelNeedsPassword = false;
+  };
 
   # Programs & global config
-  programs.mosh.enable = true;
-  programs.command-not-found.enable = false;
-  programs.bash.shellAliases = {
-    "bat" = "bat --style header --style snip --style changes";
-    "cls" = "clear";
-    "dir" = "dir --color=auto";
-    "egrep" = "egrep --color=auto";
-    "fgrep" = "fgrep --color=auto";
-    "ip" = "ip --color=auto";
-    "ls" = "exa -al --color=always --group-directories-first --icons";
-    "micro" = "micro -colorscheme geany -autosu true -mkparents true";
-    "psmem" = "ps auxf | sort -nr -k 4";
-    "psmem10" = "ps auxf | sort -nr -k 4 | head -1";
-    "su" = "sudo su -";
-    "tarnow" = "tar acf ";
-    "untar" = "tar zxvf ";
-    "vdir" = "vdir --color=auto";
-    "wget" = "wget -c";
-  };
-  programs.fish = {
-    enable = true;
-    vendor = {
-      config.enable = true;
-      completions.enable = true;
-    };
-    shellAbbrs = {
-      "cls" = "clear";
-      "reb" = "sudo nixos-rebuild switch -L";
-      "roll" = "sudo nixos-rebuild switch --rollback";
-      "su" = "sudo su -";
-    };
-    shellAliases = {
+  programs = {
+    bash.shellAliases = {
       "bat" = "bat --style header --style snip --style changes";
+      "cls" = "clear";
       "dir" = "dir --color=auto";
       "egrep" = "egrep --color=auto";
       "fgrep" = "fgrep --color=auto";
@@ -107,38 +107,70 @@
       "micro" = "micro -colorscheme geany -autosu true -mkparents true";
       "psmem" = "ps auxf | sort -nr -k 4";
       "psmem10" = "ps auxf | sort -nr -k 4 | head -1";
+      "su" = "sudo su -";
       "tarnow" = "tar acf ";
       "untar" = "tar zxvf ";
       "vdir" = "vdir --color=auto";
       "wget" = "wget -c";
     };
-    shellInit = ''
-      set fish_greeting
-    '';
-  };
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-    pinentryFlavor = "tty";
-  };
-  programs.git = {
-    enable = true;
-    lfs.enable = true;
-  };
-  programs.ssh.package = pkgs.openssh_hpn;
-
-  # Services 
-  services = {
-    vnstat.enable = true;
-    openssh = {
+    command-not-found.enable = false;
+    fish = {
       enable = true;
-      startWhenNeeded = true;
+      vendor = {
+        config.enable = true;
+        completions.enable = true;
+      };
+      shellAbbrs = {
+        "cls" = "clear";
+        "reb" = "sudo nixos-rebuild switch -L";
+        "roll" = "sudo nixos-rebuild switch --rollback";
+        "su" = "sudo su -";
+      };
+      shellAliases = {
+        "bat" = "bat --style header --style snip --style changes";
+        "dir" = "dir --color=auto";
+        "egrep" = "egrep --color=auto";
+        "fgrep" = "fgrep --color=auto";
+        "ip" = "ip --color=auto";
+        "ls" = "exa -al --color=always --group-directories-first --icons";
+        "micro" = "micro -colorscheme geany -autosu true -mkparents true";
+        "psmem" = "ps auxf | sort -nr -k 4";
+        "psmem10" = "ps auxf | sort -nr -k 4 | head -1";
+        "tarnow" = "tar acf ";
+        "untar" = "tar zxvf ";
+        "vdir" = "vdir --color=auto";
+        "wget" = "wget -c";
+      };
+      shellInit = ''
+        set fish_greeting
+      '';
     };
+    git = {
+      enable = true;
+      lfs.enable = true;
+    };
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+      pinentryFlavor = "tty";
+    };
+    mosh.enable = true;
+    # Use the performant openssh
+    ssh.package = pkgs.openssh_hpn;
+  };
+
+  # Services
+  services = {
     locate = {
       enable = true;
       localuser = null;
       locate = pkgs.plocate;
     };
+    openssh = {
+      enable = true;
+      startWhenNeeded = true;
+    };
+    vnstat.enable = true;
   };
 
   # Systemd-oomd daemon
@@ -148,17 +180,9 @@
     extraConfig = { DefaultMemoryPressureDurationSec = "20s"; };
   };
 
-  # Docker
-  virtualisation.docker = {
-    autoPrune.enable = true;
-    autoPrune.flags = [ "-a" ];
-    rootless.enable = true;
-    storageDriver = "overlay2";
-  };
-
   # Environment
   environment = {
-    # Packages the system needs, individual user packages shall be put into home-manager configurations
+    # Packages the system needs
     systemPackages = with pkgs; [
       btop
       exa
@@ -168,6 +192,7 @@
       python3
       ugrep
       wget
+      curl
     ];
     # Increase Mosh timeout
     variables = { MOSH_SERVER_NETWORK_TMOUT = "604800"; };
@@ -203,18 +228,6 @@
     nixPath = [ "nixpkgs=${sources.nixpkgs}" ];
   };
 
-  # Our kernel parameters
-  boot.kernel.sysctl = {
-    "kernel.nmi_watchdog" = 0;
-    "kernel.printks" = "3 3 3 3";
-    "kernel.sched_cfs_bandwidth_slice_us" = 3000;
-    "kernel.sysrq" = 1;
-    "kernel.unprivileged_userns_clone" = 1;
-    "net.core.rmem_max" = 2500000;
-    "net.ipv4.tcp_fin_timeout" = 5;
-    "vm.swappiness" = 133;
-  };
-
   # Clean results periodically
   systemd.services.nix-clean-result = {
     serviceConfig.Type = "oneshot";
@@ -242,4 +255,10 @@
       ${pkgs.nix}/bin/nix store diff-closures /run/current-system "$systemConfig"
     fi
   '';
+
+  # Zerotier hosts
+  networking.hosts = {
+    "10.241.1.1" = [ "tv-nixos" ];
+    "10.241.1.2" = [ "slim-lair" ];
+  };
 }

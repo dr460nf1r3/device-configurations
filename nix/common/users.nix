@@ -1,6 +1,6 @@
 { keys, lib, config, home-manager, ... }: {
   # All users are immuntable; if a password is required it needs to be set via passwordFile
-  users.mutableUsers = true;
+  #users.mutableUsers = true;
 
   # This is for easy configuration roll-out
   users.users.ansible = {
@@ -12,11 +12,20 @@
   };
   # My user
   users.users.nico = {
-    extraGroups = [ "wheel" "docker" "networkmanager" "disk" "audio" "video" "systemd-journal" "adbusers" ];
+    extraGroups = [
+      "wheel"
+      "docker"
+      "networkmanager"
+      "disk"
+      "audio"
+      "video"
+      "systemd-journal"
+      "adbusers"
+    ];
     home = "/home/nico";
     isNormalUser = true;
     openssh.authorizedKeys.keyFiles = [ keys.nico ];
-    passwordFile = "/var/dragons/secrets/pass/nico";
+    #passwordFile = "/var/dragons/secrets/pass/nico";
     uid = 1000;
   };
 

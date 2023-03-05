@@ -1,0 +1,111 @@
+{
+  "nodes": {
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixos-unstable"
+        ],
+        "utils": "utils"
+      },
+      "locked": {
+        "lastModified": 1678006026,
+        "narHash": "sha256-cGOfrU7JsKHAWXbPVDTOu2yyMb7GeWdUtJQNQSqht+w=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "68ba59578352815ac372b17fb3df9db39afb1407",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "keys_nico": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-bjGTTIvcY63ND86cV15JJIhbH0rPmqkTZaWQFTTQME8=",
+        "type": "file",
+        "url": "https://github.com/dr460nf1r3.keys"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/dr460nf1r3.keys"
+      }
+    },
+    "nixos-unstable": {
+      "locked": {
+        "lastModified": 1677932085,
+        "narHash": "sha256-+AB4dYllWig8iO6vAiGGYl0NEgmMgGHpy9gzWJ3322g=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "3c5319ad3aa51551182ac82ea17ab1c6b0f0df89",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "home-manager": "home-manager",
+        "keys_nico": "keys_nico",
+        "nixos-unstable": "nixos-unstable",
+        "src-chaotic-toolbox": "src-chaotic-toolbox",
+        "src-repoctl": "src-repoctl"
+      }
+    },
+    "src-chaotic-toolbox": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1676913434,
+        "narHash": "sha256-fI3i293qkgoHwyQf6n3DnwXODyPtZquMV0dnLqMQDE4=",
+        "owner": "chaotic-aur",
+        "repo": "toolbox",
+        "rev": "874871cffe008ea78b74a7def86c4d323ac2dca8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chaotic-aur",
+        "repo": "toolbox",
+        "type": "github"
+      }
+    },
+    "src-repoctl": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1665410540,
+        "narHash": "sha256-hxWwyD6UHE8SSIooEQB5+dHGLgmv1bJ3G64PmKgKg58=",
+        "owner": "cassava",
+        "repo": "repoctl",
+        "rev": "86faed1474e9d8fed9b10a9b8864316e34066d6a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cassava",
+        "repo": "repoctl",
+        "type": "github"
+      }
+    },
+    "utils": {
+      "locked": {
+        "lastModified": 1667395993,
+        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

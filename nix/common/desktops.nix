@@ -1,15 +1,5 @@
 { pkgs, ... }: {
-
-  # 90% ZRAM
-  zramSwap = {
-    enable = true;
-    memoryPercent = 90;
-  };
-
-  # Supposedly better for the SSD.
-  fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
-
-  # Enable sound with pipewire
+  # Enable sound with Pipewire
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -22,17 +12,15 @@
     systemWide = false;
     wireplumber.enable = true;
   };
-
-  # Power profiles daemon
-  services.power-profiles-daemon.enable = true;
-
   environment.variables = {
-    AE_SINK = "ALSA"; # For Kodi, better latency/volume under pw
     SDL_AUDIODRIVER = "pipewire";
     ALSOFT_DRIVERS = "pipewire";
   };
 
-  # LAN discovery.
+  # Power profiles daemon
+  services.power-profiles-daemon.enable = true;
+
+  # LAN discovery
   services.avahi = {
     enable = true;
     nssmdns = true;
@@ -48,17 +36,19 @@
     driSupport32Bit = true;
   };
 
-  # Microcode updates
+  # Microcode and firmware updates
+  services.fwupd.enable = true;
   hardware.cpu.intel.updateMicrocode = true;
   hardware.cpu.amd.updateMicrocode = true;
 
+  # Kernel paramters & settings
   boot.kernelParams = [
     # Disable all mitigations
     "mitigations=off"
     "nopti"
     "tsx=on"
 
-    # Laptops and dekstops don't need Watchdog
+    # Laptops and desktops don't need watchdog
     "nowatchdog"
 
     # https://github.com/NixOS/nixpkgs/issues/35681#issuecomment-370202008
@@ -67,22 +57,14 @@
     # https://www.phoronix.com/news/Linux-Splitlock-Hurts-Gaming
     "split_lock_detect=off"
   ];
-
   boot.kernel.sysctl = {
     "vm.max_map_count" = 16777216; # helps with Wine ESYNC/FSYNC
   };
 
-  # List packages.
+  # List the packages I need
   environment.systemPackages = with pkgs; [
-    # Desktop apps
     acpi
-    btop
-    brightnessctl
     ffmpegthumbnailer
-    keybase-gui
-    libinput
-    libinput-gestures
-    libsForQt5.kio # Fixes "Unknown protocol 'file'."
     lm_sensors
     obs-studio-wrapped
     spotify
@@ -91,41 +73,34 @@
     xdg-utils
     teamviewer
     librewolf
-    jamesdsp
-
-    # Development apps
-    bind.dnsutils # "dig"
-    heroku
-    logstalgia # Chaotic
-    nixpkgs-fmt # Nix
-    nixpkgs-review # Nix
-    python3Minimal
-    shellcheck # Bash-dev
-    shfmt # Bash-dev
-    yarn # Front-dev
-
+    thunderbird
+    nextcloud-client
+    neofetch
+    libreoffice-fresh
+    spot
     helvum
+    spicetify-cli
+    spotdl
     libva-utils
     ugrep
+    aspell
     aspellDicts.en
     aspellDicts.de
-
+    hunspell
+    hunspellDicts.de_DE
+    hunspellDicts.en_US
     inkscape
     gimp
-
-    # Gaming
+    jetbrains-mono
+    ungoogled-chromium
+    lutris
     mangohud
     wine-staging
     vulkan-tools
     winetricks
   ];
 
-  # Special apps (requires more than their package to work).
-  programs.adb.enable = true;
-  programs.gamemode.enable = true;
-  programs.steam.enable = true;
-
-  # Override some packages' settings, sources, etc...
+  # Override obs-studio with plugins
   nixpkgs.overlays = let
     thisConfigsOverlay = final: prev: {
       # Obs with plugins
@@ -141,14 +116,29 @@
     };
   in [ thisConfigsOverlay ];
 
-  # Enable services (automatically includes their apps' packages).
-  services.fwupd.enable = true;
-  services.keybase.enable = true;
-  services.kbfs.enable = true;
+  # Special apps (requires more than their package to work)
+  programs.adb.enable = true;
+  programs.gamemode.enable = true;
+  programs.steam = { enable = true; };
 
-  # Fonts.
+  # Automatically tune nice levels
+  services.ananicy = {
+    enable = true;
+    package = pkgs.ananicy-cpp;
+  };
+
+  # 90% ZRAM as swap
+  zramSwap = {
+    enable = true;
+    memoryPercent = 90;
+  };
+
+  # For out-of-box gaming with Heroic Game Launcher
+  services.flatpak.enable = true;
+
+  # Fonts
   fonts = {
-    enableDefaultFonts = true; # Those fonts you expect every distro to have.
+    enableDefaultFonts = true; # Those fonts you expect every distro to have
     fonts = with pkgs; [
       fira
       fira-code
@@ -164,16 +154,10 @@
     fontconfig = {
       cache32Bit = true;
       defaultFonts = {
-        serif = [ "Noto Serif" ];
+        serif = [ "Fira" ];
         sansSerif = [ "Fira" ];
-        monospace = [ "Fira Code" ];
+        monospace = [ "Jetbrains Mono" ];
       };
     };
   };
-
-  # For out-of-box gaming with Heroic Game Launcher
-  services.flatpak.enable = true;
-
-  # Allow to cross-compile to aarch64
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 }

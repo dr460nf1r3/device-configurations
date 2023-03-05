@@ -44,7 +44,7 @@
         ];
       });
       defaultModules = [
-        "${nixos}/nixos/modules/profiles/hardened.nix"
+        #"${nixos}/nixos/modules/profiles/hardened.nix"
         home-manager.nixosModules.home-manager
         overlay-unstable
       ];
@@ -53,6 +53,11 @@
         inherit system;
         specialArgs = specialArgs;
         modules = defaultModules ++ [ ./nixos-tv.nix ];
+      };
+      nixosConfigurations."slim-lair" = nixos.lib.nixosSystem {
+        inherit system;
+        specialArgs = specialArgs;
+        modules = defaultModules ++ [ ./slim-lair.nix ];
       };
     };
 }

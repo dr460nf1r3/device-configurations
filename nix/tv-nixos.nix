@@ -8,7 +8,7 @@
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   # Base configuration
-  networking.hostName = "nixos-tv";
+  networking.hostName = "tv-nixos";
   networking.networkmanager.enable = true;
 
   # Correct configurations to use on this device, taken from the hardware quirks repo
