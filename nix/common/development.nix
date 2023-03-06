@@ -19,16 +19,22 @@
     ventoy-bin-full
     vscode
     vscode-extensions.b4dm4n.vscode-nixpkgs-fmt
+    vscode-extensions.bbenoist.nix
+    vscode-extensions.eamodio.gitlens
     vscode-extensions.esbenp.prettier-vscode
+    vscode-extensions.foxundermoon.shell-format
     vscode-extensions.github.codespaces
     vscode-extensions.github.copilot
-    vscode-extensions.jdinhlife.gruvbox
     vscode-extensions.ms-azuretools.vscode-docker
     vscode-extensions.ms-python.python
     vscode-extensions.ms-python.vscode-pylance
+    vscode-extensions.ms-vscode.hexeditor
     vscode-extensions.ms-vsliveshare.vsliveshare
+    vscode-extensions.njpwerner.autodocstring
+    vscode-extensions.redhat.vscode-xml
     vscode-extensions.redhat.vscode-yaml
     vscode-extensions.timonwong.shellcheck
+    vscode-extensions.tyriar.sort-lines
     wireshark
     xdg-utils
     yarn # Front-dev

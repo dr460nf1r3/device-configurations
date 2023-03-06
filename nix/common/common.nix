@@ -26,6 +26,7 @@
   };
 
   # Zerotier network to connect the devices
+  networking.firewall.trustedInterfaces = [ "ztnfaljg5n" ];
   services.zerotierone = {
     enable = true;
     joinNetworks = [ "a84ac5c10a715aa7" ];
@@ -226,6 +227,8 @@
       options = "--delete-older-than 7d";
     };
     settings = {
+      # Only allow the wheel group to handle Nix
+      allowed-users = [ "@wheel" ];
       # Allow using flakes
       auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];

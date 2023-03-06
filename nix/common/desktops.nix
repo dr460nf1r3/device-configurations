@@ -64,6 +64,7 @@
   # List the packages I need
   environment.systemPackages = with pkgs; [
     acpi
+    asciinema
     aspell
     aspellDicts.de
     aspellDicts.en
@@ -104,20 +105,22 @@
   ];
 
   # Override obs-studio with plugins
-  nixpkgs.overlays = let
-    thisConfigsOverlay = final: prev: {
-      # Obs with plugins
-      obs-studio-wrapped =
-        final.wrapOBS.override { inherit (final) obs-studio; } {
-          plugins = with final.obs-studio-plugins; [
-            obs-gstreamer
-            obs-pipewire-audio-capture
-            obs-vaapi
-            obs-vkcapture
-          ];
-        };
-    };
-  in [ thisConfigsOverlay ];
+  nixpkgs.overlays =
+    let
+      thisConfigsOverlay = final: prev: {
+        # Obs with plugins
+        obs-studio-wrapped =
+          final.wrapOBS.override { inherit (final) obs-studio; } {
+            plugins = with final.obs-studio-plugins; [
+              obs-gstreamer
+              obs-pipewire-audio-capture
+              obs-vaapi
+              obs-vkcapture
+            ];
+          };
+      };
+    in
+    [ thisConfigsOverlay ];
 
   # Special apps
   programs.adb.enable = true;
@@ -132,6 +135,7 @@
     enable = true;
     package = pkgs.ananicy-cpp;
   };
+
   # For out-of-box gaming with Heroic Game Launcher
   services.flatpak.enable = true;
 

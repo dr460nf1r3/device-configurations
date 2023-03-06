@@ -6,7 +6,8 @@ let
     rev = "cf6bc89";
     sha256 = "U9pfie3qABp5sTr3M9ga/jX8C807FeiXlmEZnC4ZM58=";
   };
-in {
+in
+{
   # Enable GNOME desktop environment
   services.xserver = {
     enable = true;
@@ -23,26 +24,26 @@ in {
   # Exclude bloated packages
   environment.gnome.excludePackages = (with pkgs; [ gnome-photos gnome-tour ])
     ++ (with pkgs.gnome; [
-      atomix # puzzle game
-      cheese # webcam tool
-      epiphany # web browser
-      evince # document viewer
-      geary # email reader
-      gedit # text editor
-      gnome-characters
-      gnome-maps
-      gnome-music
-      gnome-terminal
-      gnome-weather
-      hitori # sudoku game
-      iagno # go game
-      tali # poker game
-      totem # video player
-      yelp # useless help app
-    ]);
+    atomix # puzzle game
+    cheese # webcam tool
+    epiphany # web browser
+    evince # document viewer
+    geary # email reader
+    gedit # text editor
+    gnome-characters
+    gnome-maps
+    gnome-music
+    gnome-terminal
+    gnome-weather
+    hitori # sudoku game
+    iagno # go game
+    tali # poker game
+    totem # video player
+    yelp # useless help app
+  ]);
 
   # Style the desktop
-  stylix.base16Scheme = "${base16-schemes}/gruvbox-dark-soft.yaml";
+  stylix.base16Scheme = "${base16-schemes}/gruvbox-dark-hard.yaml";
   stylix.image = pkgs.fetchurl {
     url = "https://gitlab.com/garuda-linux/themes-and-settings/artwork/garuda-wallpapers/-/raw/ac03a670062e80a2c0306bc4c8dd3ae485b4566c/src/garuda-wallpapers/Malefor.jpg";
     sha256 = "865b778723caaa7f3c26bcb2a9e8048257fc4eef2b90fbf788044f22e618cb64";

@@ -2,10 +2,14 @@
   description = "Nico's Nix flake";
 
   inputs = {
-    # We roll unstable
+    # We roll unstable, as usual
     nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     # Automated system themes - seems to be broken atm
     stylix.url = "github:danth/stylix";
+    # All of the VSCode extensions not available in Nixpkgs
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    # Reset rootfs every reboot
+    impermanence.url = "github:nix-community/impermanence";
     # Home management
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -29,7 +33,7 @@
     };
   };
 
-  outputs = { nixos-unstable, home-manager, stylix, ... }@attrs:
+  outputs = { nixos-unstable, home-manager, stylix, impermanence, ... }@attrs:
     let
       nixos = nixos-unstable;
       system = "x86_64-linux";
@@ -53,7 +57,11 @@
         home-manager.nixosModules.home-manager
         overlay-unstable
       ];
-    in {
+    in
+    {
+      # Defines a formatter for "nix fmt"
+      formatter.x86_64-linux = nixos-unstable.legacyPackages.x86_64-linux.nixpkgs-fmt;
+      # All the systems
       nixosConfigurations."nixos-tv" = nixos.lib.nixosSystem {
         inherit system;
         specialArgs = specialArgs;
@@ -62,7 +70,7 @@
       nixosConfigurations."slim-lair" = nixos.lib.nixosSystem {
         inherit system;
         specialArgs = specialArgs;
-        modules = defaultModules ++ [ ./slim-lair.nix stylix.nixosModules.stylix ];
+        modules = defaultModules ++ [ ./slim-lair.nix stylix.nixosModules.stylix impermanence.nixosModules.impermanence ];
       };
     };
 }

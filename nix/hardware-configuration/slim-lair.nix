@@ -12,6 +12,7 @@
   fileSystems."/" = {
     device = "zroot/ROOT/empty";
     fsType = "zfs";
+    neededForBoot = true;
   };
   fileSystems."/nix" = {
     device = "zroot/ROOT/nix";
@@ -28,6 +29,7 @@
   fileSystems."/var/persistent" = {
     device = "zroot/data/persistent";
     fsType = "zfs";
+    neededForBoot = true;
   };
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/C2C3-69F1";

@@ -5,6 +5,7 @@
     ./common/desktops.nix
     ./common/development.nix
     ./common/gnome.nix
+    ./common/impermanence.nix
     ./hardware-configuration/slim-lair.nix
   ];
 

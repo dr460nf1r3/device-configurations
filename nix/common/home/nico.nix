@@ -197,7 +197,8 @@
     enable = true;
     # For watching animes in 60fps
     package = pkgs.wrapMpv
-      (pkgs.mpv-unwrapped.override { vapoursynthSupport = true; }) {
+      (pkgs.mpv-unwrapped.override { vapoursynthSupport = true; })
+      {
         # thanks @thiagokokada
         extraMakeWrapperArgs = [
           "--prefix"
