@@ -18,10 +18,6 @@
     device = "zroot/ROOT/nix";
     fsType = "zfs";
   };
-  fileSystems."/home/nico" = {
-    device = "zroot/data/nico";
-    fsType = "zfs";
-  };
   fileSystems."/home/nico/Games" = {
     device = "zroot/games/home";
     fsType = "zfs";
@@ -32,7 +28,7 @@
     neededForBoot = true;
   };
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/C2C3-69F1";
+    device = "/dev/disk/by-uuid/7044-F478";
     fsType = "vfat";
   };
 

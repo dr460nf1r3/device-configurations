@@ -91,6 +91,9 @@
 
   # We want to be insulted on wrong passwords
   security.sudo = {
+    extraConfig = ''
+        Defaults pwfeedback
+      '';
     package = pkgs.sudo.override { withInsults = true; };
     wheelNeedsPassword = false;
   };
@@ -189,6 +192,7 @@
       btop
       cached-nix-shell
       curl
+      direnv
       exa
       jq
       killall

@@ -51,8 +51,9 @@
   # SSD
   services.fstrim.enable = true;
 
-  # AMD GPU
+  # AMD device
   services.xserver.videoDrivers = [ "amdgpu" ];
+  services.hardware.bolt.enable = false;
 
   # OpenGL support
   hardware.opengl = {

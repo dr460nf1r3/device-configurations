@@ -22,17 +22,22 @@ in
   };
 
   # Exclude bloated packages
-  environment.gnome.excludePackages = (with pkgs; [ gnome-photos gnome-tour ])
-    ++ (with pkgs.gnome; [
+  environment.gnome.excludePackages = (with pkgs; [
+    gnome-tour
+    gnome-user-docs
+  ])
+  ++ (with pkgs.gnome; [
     atomix # puzzle game
     cheese # webcam tool
     epiphany # web browser
     evince # document viewer
-    geary # email reader
     gedit # text editor
     gnome-characters
     gnome-maps
+    simple-scan
+    pkgs.gnome-text-editor
     gnome-music
+    gnome-software
     gnome-terminal
     gnome-weather
     hitori # sudoku game
@@ -45,15 +50,15 @@ in
   # Style the desktop
   stylix.base16Scheme = "${base16-schemes}/gruvbox-dark-hard.yaml";
   stylix.image = pkgs.fetchurl {
-    url = "https://gitlab.com/garuda-linux/themes-and-settings/artwork/garuda-wallpapers/-/raw/ac03a670062e80a2c0306bc4c8dd3ae485b4566c/src/garuda-wallpapers/Malefor.jpg";
-    sha256 = "865b778723caaa7f3c26bcb2a9e8048257fc4eef2b90fbf788044f22e618cb64";
+    url = "https://raw.githubusercontent.com/FrenzyExists/wallpapers/main/Gruv/grub-coffee.png";
+    sha256 = "sha256-9kOtRpFefKgFLR3gFRfICLwqU3NhjPezDtNTKSuvzIc=";
   };
   stylix.polarity = "dark";
   stylix.fonts = {
     serif = config.stylix.fonts.sansSerif;
     sansSerif = {
       package = pkgs.fira;
-      name = "Fira";
+      name = "Fira Sans 10";
     };
     monospace = {
       package = pkgs.jetbrains-mono;
@@ -65,13 +70,26 @@ in
     };
   };
 
+  # Configure Qt theming
+  qt = {
+    enable = true;
+    style = "adwaita";
+    platformTheme = "gnome";
+  };
+
   # Additional GNOME packages not included by default
   environment.systemPackages = with pkgs; [ gnome.gnome-tweaks ];
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 
   # Allow using online accounts
   services.gnome.gnome-online-accounts.enable = true;
+  services.gnome.glib-networking.enable = true;
 
+  # GSConnect
+  programs.kdeconnect = {
+    enable = true;
+    package = pkgs.gnomeExtensions.gsconnect;
+  };
   # Enable the GNOME keyring
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.nico.enableGnomeKeyring = true;
