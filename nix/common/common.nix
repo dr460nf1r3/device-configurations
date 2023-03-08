@@ -1,5 +1,5 @@
 { pkgs, lib, config, sources, ... }: {
-  imports = [ ./hardening.nix ./users.nix ];
+  imports = [ ./hardening.nix ./users.nix ./misc/quiet-boot.nix ];
 
   # Network (NetworkManager)
   networking = {
@@ -78,7 +78,7 @@
   };
 
   # Console setup
-  console = {
+  console = lib.mkForce {
     font = "Lat2-Terminus16";
     keyMap = "de";
   };
@@ -92,8 +92,8 @@
   # We want to be insulted on wrong passwords
   security.sudo = {
     extraConfig = ''
-        Defaults pwfeedback
-      '';
+      Defaults pwfeedback
+    '';
     package = pkgs.sudo.override { withInsults = true; };
     wheelNeedsPassword = false;
   };
@@ -109,7 +109,7 @@
       "ip" = "ip --color=auto";
       "ls" = "exa -al --color=always --group-directories-first --icons";
       "micro" = "micro -colorscheme geany -autosu true -mkparents true";
-      "psmem" = "ps auxf | sort -nr -k 4";
+      "psmem" = "ps auxf | sort -nsr -k 4";
       "psmem10" = "ps auxf | sort -nr -k 4 | head -1";
       "su" = "sudo su -";
       "tarnow" = "tar acf ";
@@ -189,10 +189,14 @@
     # Packages the system needs
     systemPackages = with pkgs; [
       bind
+      bitwarden-cli
       btop
       cached-nix-shell
+      cachix
       curl
       direnv
+      duf
+      dconf2nix
       exa
       jq
       killall
@@ -204,6 +208,7 @@
       traceroute
       ugrep
       wget
+      tldr
       whois
     ];
     # Increase Mosh timeout
@@ -238,6 +243,9 @@
       experimental-features = [ "nix-command" "flakes" ];
       max-jobs = "auto";
       trusted-users = [ "root" "nico" ];
+      substituters = ["https://nix-gaming.cachix.org"];
+      trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
+
     };
     nixPath = [ "nixpkgs=${sources.nixpkgs}" ];
   };

@@ -1,5 +1,4 @@
 { config, pkgs, lib, ... }:
-
 {
   # Always needed home-manager settings - don't touch!
   home.homeDirectory = "/home/nico";
@@ -7,47 +6,22 @@
   home.username = "nico";
 
   # Personally used packages
-  home.packages = with pkgs; [
-    gnomeExtensions.burn-my-windows
-    gnomeExtensions.space-bar
-    gnomeExtensions.username-and-hostname-to-panel
-    gnomeExtensions.useless-gaps
-    gnomeExtensions.unite
-    gnomeExtensions.transparent-window-moving
-    gnomeExtensions.toggle-alacritty
-    gnomeExtensions.syncthing-indicator
-    gnomeExtensions.spotify-tray
-    gnomeExtensions.rounded-window-corners
-    gnomeExtensions.rounded-corners
-    gnomeExtensions.remove-alttab-delay-v2
-    gnomeExtensions.project-manager-for-vscode
-    gnomeExtensions.ideapad-mode
-    gnomeExtensions.gsconnect
-    gnomeExtensions.gnome-clipboard
-    gnomeExtensions.github-notifications
-    gnomeExtensions.gitlab-extension
-    gnomeExtensions.expandable-notifications
-    gnomeExtensions.dash2dock-lite
-    gnomeExtensions.desktop-cube
-    gnomeExtensions.compiz-windows-effect
-    gnomeExtensions.bubblemail
-    gnomeExtensions.blur-my-shell
-    gnomeExtensions.arcmenu
-  ];
+  #home.packages = with pkgs; [
+  #];
 
   # Application user configuration
   programs = {
     bash = {
       enable = true;
       initExtra = ''
-        if [ "$SSH_CLIENT" != "" ]; then
-          exec tmux
+        if [ -z "$TMUX" ] &&  [ "$SSH_CLIENT" != "" ]; then
+          exec ${pkgs.fish}/bin/tmux
         fi
       '';
     };
     bat = {
       enable = true;
-      config = { theme = "GitHub"; };
+      config = { theme = "Gruvbox"; };
     };
     btop = {
       enable = true;
@@ -124,7 +98,7 @@
           style = "purple";
           truncate_to_repo = true;
           truncation_length = 0;
-          truncation_symbol = "repo: ";
+          truncation_symbol = "repo = ";
         };
         status = {
           disabled = false;
@@ -143,7 +117,7 @@
       clock24 = true;
       enable = true;
       extraConfig = ''
-        set-option -ga terminal-overrides ",*256col*:Tc,alacritty:Tc"
+        set-option -ga terminal-overrides ";*256col* =Tc;alacritty =Tc"
       '';
       historyLimit = 10000;
       newSession = true;
@@ -151,6 +125,7 @@
       shell = "${pkgs.fish}/bin/fish";
     };
   };
+  # Enhance audio output
   services.pulseeffects = {
     enable = true;
   };
@@ -158,14 +133,23 @@
   gtk = {
     enable = true;
     iconTheme = {
-      name = "Tela-circle-dark";
-      package = pkgs.tela-circle-icon-theme;
+      name = "oomox-gruvbox-dark";
+      package = pkgs.gruvbox-dark-icons-gtk;
     };
   };
+  # Configure Qt theming
+  qt = {
+    enable = true;
+    style.name = "adwaita-dark";
+    platformTheme = "gtk";
+  };
+  # Our cursor theme
   home.pointerCursor =
     {
       name = "Numix-Cursor";
       package = pkgs.numix-cursor-theme;
+      size = 32;
+      gtk.enable = true;
     };
   # Enable dconf
   dconf.enable = true;
@@ -179,16 +163,16 @@
         "gsconnect@andyholmes.github.io"
         #"dash-to-dock@micxgx.gmail.com"
         #"desktop-cube@schneegans.github.com"
-        "unite@hardpixel.eu"
+        #"unite@hardpixel.eu"
         #"github.notifications@alexandre.dufournet.gmail.com"
         #"expandable-notifications@kaan.g.inam.org"
         #"gnome-clipboard@b00f.github.i"
         #"rounded-window-corners@yilozt.shell-extension"
         #"projectmanagerforvscode@ahmafi.ir"
-        "toggle-alacritty@itstime.tech"
+        #"toggle-alacritty@itstime.tech"
         "blur-my-shell@aunetx"
         #"dash2dock-lite@icedman.github.com"
-        "useless-gaps@pimsnel.com"
+        #"useless-gaps@pimsnel.com"
         #"sp-tray@sp-tray.esenliyim.github.com"
       ];
       favorite-apps = [
@@ -221,8 +205,8 @@
     "org/gnome/desktop/interface" = { monospace-font-name = "JetBrains Mono 10"; };
     "org/gnome/desktop/peripherals/touchpad" = { tap-to-click = true; };
     "org/gnome/desktop/privacy" = { recent-files-max-age = 30; };
-    "org/gnome/desktop/screensaver" = { lock-delay = "uint32 120"; };
-    "org/gnome/desktop/wm/preferences" = { button-layout = "close,minimize:appmenu"; };
+    "org/gnome/desktop/screensaver" = { lock-delay = lib.hm.gvariant.mkUint32 120; };
+    "org/gnome/desktop/wm/preferences" = { button-layout = "close;minimize=appmenu"; };
     "org/gnome/desktop/wm/preferences" = { titlebar-font = "Fira Sans Bold 11"; };
     "org/gnome/mutter" = { center-new-windows = true; };
     "org/gnome/mutter" = { workspaces-only-on-primary = false; };
@@ -238,47 +222,20 @@
     "org/gnome/shell/extensions/gsconnect/device/c9b46110e36de16a/plugin/battery" = {
       full-battery-notification = true;
       custom-battery-notification = true;
-      custom-battery-notification-value = "uint32 85";
+      custom-battery-notification-value = lib.hm.gvariant.mkUint32 85;
     };
     "org/gnome/shell/extensions/gsconnect/device/c9b46110e36de16a/plugin/telephony" = { ringing-pause = true; };
   };
 
-  # Configure Chromium for hardware acceleration & dark mode
-  programs.chromium.commandLineArgs = [
-    "--enable-features=VaapiVideoDecoder"
-    "--enable-features=WebUIDarkMode"
-    "--enable-gpu-rasterization"
-    "--enable-zero-copy"
-    "--force-dark-mode"
-    "--ignore-gpu-blocklist"
-    "--ignore-gpu-blocklist"
-    "--ozone-platform-hint=auto"
-  ];
+  # Enable dircolors
   programs.dircolors.enable = true;
 
   # Files that I prefer to just specify
   home.file = {
-    # I Don't really use bash, so I don't want its history...
-    ".bashrc".text = ''
-      unset HISTFILE
-    '';
     # Don't forget to always load my .profile
     ".bash_profile".text = ''
       [[ -f ~/.bashrc ]] && . ~/.bashrc
       [[ -f ~/.profile ]] && . ~/.profile
-    '';
-    # I use autologin and forever in love with tmux sessions.
-    ".profile".text = ''
-      if [ -z "$TMUX" ] &&  [ "$SSH_CLIENT" != "" ]; then
-        exec ${pkgs.fish}/bin/tmux"
-    '';
-    # `programs.tmux` looks bloatware nearby this simplist config,
-    ".tmux.conf".text = ''
-      set-option -g default-shell "${pkgs.fish}/bin/fish"
-      # Full color range
-      set-option -ga terminal-overrides ",*256col*:Tc,alacritty:Tc"
-      # Expect mouse
-      set -g mouse off
     '';
   };
   programs.mpv = {

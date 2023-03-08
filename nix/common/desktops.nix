@@ -1,4 +1,5 @@
 { pkgs, inputs, ... }: {
+  imports = [ ./misc/chromium.nix ./misc/games.nix ];
   # Enable sound with Pipewire
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -76,25 +77,19 @@
     hunspellDicts.en_US
     inkscape
     jetbrains-mono
-    libreoffice-fresh
-    librewolf
     libva-utils
     lm_sensors
-    lutris
     mangohud
     neofetch
     nextcloud-client
     obs-studio-wrapped
     spicetify-cli
-    spot
     spotdl
-    spotify
     tdesktop
-    teamviewer
+    teams-for-linux
     thunderbird
     tor-browser-bundle-bin
     ugrep
-    ungoogled-chromium
     usbutils
     vulkan-tools
     wine-staging
@@ -125,7 +120,7 @@
   # Special apps
   programs.adb.enable = true;
   programs.gamemode.enable = true;
-  programs.steam = { enable = true; };
+  programs.steam.enable = true;
 
   # Wayland for Android apps
   virtualisation.waydroid.enable = true;
@@ -138,6 +133,9 @@
 
   # For out-of-box gaming with Heroic Game Launcher
   services.flatpak.enable = true;
+
+  # For school
+  services.onedrive.enable = true;
 
   # Let me use my Yubikey
   hardware.gpgSmartcards.enable = true;

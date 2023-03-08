@@ -32,9 +32,6 @@
   # Don't lock kernel modules, this is also enabled by the hardening profile by default
   security.lockKernelModules = false;
 
-  # Disable root user login
-  users.users.root.hashedPassword = "*";
-
   # Prevent TOFU MITM
   programs.ssh.knownHosts = {
     github-rsa.hostNames = [ "github.com" ];

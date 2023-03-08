@@ -14,9 +14,9 @@
     loader = {
       systemd-boot = {
         enable = true;
+        consoleMode = "max";
         editor = false;
       };
-      timeout = 1;
       efi.canTouchEfiVariables = true;
     };
     supportedFilesystems = [ "zfs" ];
@@ -77,6 +77,11 @@
 
   # Enable the touchpad
   environment.systemPackages = with pkgs; [ libinput libinput-gestures ];
+
+  # Fix the monitors
+  home-manager.users.nico = { lib, ... }: {
+    home.file.".config/monitors.xml".source = ./assets/monitors-slim-lair.xml;
+  };
 
   # I can't be bothered to upgrade this manually
   system.autoUpgrade.enable = true;

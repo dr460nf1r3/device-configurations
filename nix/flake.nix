@@ -10,7 +10,7 @@
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     # Reset rootfs every reboot
     impermanence.url = "github:nix-community/impermanence";
-    # Home management
+    # Home management - https://github.com/nix-community/home-manager/issues/3671
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixos-unstable";

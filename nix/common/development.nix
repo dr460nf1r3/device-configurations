@@ -19,26 +19,26 @@
     ventoy-bin-full
     (vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions; [
-      b4dm4n.vscode-nixpkgs-fmt
-      bbenoist.nix
-      eamodio.gitlens
-      esbenp.prettier-vscode
-      foxundermoon.shell-format
-      github.codespaces
-      github.copilot
-      ms-azuretools.vscode-docker
-      ms-python.python
-      ms-python.vscode-pylance
-      ms-vscode.hexeditor
-      ms-vsliveshare.vsliveshare
-      njpwerner.autodocstring
-      redhat.vscode-xml
-      redhat.vscode-yaml
-      timonwong.shellcheck
-      tyriar.sort-lines
+        b4dm4n.vscode-nixpkgs-fmt
+        bbenoist.nix
+        eamodio.gitlens
+        esbenp.prettier-vscode
+        foxundermoon.shell-format
+        github.codespaces
+        github.copilot
+        jdinhlife.gruvbox
+        ms-azuretools.vscode-docker
+        ms-python.python
+        ms-python.vscode-pylance
+        ms-vscode.hexeditor
+        ms-vsliveshare.vsliveshare
+        njpwerner.autodocstring
+        redhat.vscode-xml
+        redhat.vscode-yaml
+        timonwong.shellcheck
+        tyriar.sort-lines
       ];
     })
-    wireshark
     xdg-utils
     yarn # Front-dev
   ];
@@ -47,11 +47,14 @@
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # Enable services (automatically includes their apps' packages)
-  services.kbfs.enable = true;
-  services.keybase.enable = true;
+  # services.kbfs.enable = true;
+  # services.keybase.enable = true;
 
   # Disable nixos-containers (conflicts with virtualisation.containers)
   boot.enableContainers = false;
+
+  # Wireshark
+  programs.wireshark.enable = true;
 
   # Virtualisation / Containerization
   virtualisation = {
@@ -70,6 +73,7 @@
     podman = {
       enable = true;
       dockerCompat = true;
+      dockerSocket.enable = true;
     };
   };
 
