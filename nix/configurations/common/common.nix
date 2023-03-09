@@ -1,4 +1,5 @@
-{ pkgs, lib, config, ... }: {
+{ pkgs, lib, config, ... }: 
+{
   imports = [
     ./boot.nix
     ./hardening.nix
@@ -26,11 +27,12 @@
 
   # We want to be insulted on wrong passwords
   security.sudo = {
+    execWheelOnly = true;
     extraConfig = ''
       Defaults pwfeedback
+      ansible ALL=(ALL) NOPASSWD:ALL
     '';
     package = pkgs.sudo.override { withInsults = true; };
-    wheelNeedsPassword = false;
   };
 
   # Programs I always need

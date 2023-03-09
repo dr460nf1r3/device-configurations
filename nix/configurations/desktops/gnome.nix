@@ -35,6 +35,7 @@ in
 
   # Exclude bloated packages
   environment.gnome.excludePackages = (with pkgs; [
+    gnome-console
     gnome-tour
     gnome-user-docs
   ])
@@ -87,21 +88,11 @@ in
     gnome.dconf-editor
     gnome.gnome-boxes
     gnome.gnome-tweaks
-    gnomeExtensions.blur-my-shell
-    gnomeExtensions.burn-my-windows
-    gnomeExtensions.desktop-cube
     gnomeExtensions.expandable-notifications
     gnomeExtensions.github-notifications
-    gnomeExtensions.gitlab-extension
-    gnomeExtensions.gnome-clipboard
     gnomeExtensions.gsconnect
-    gnomeExtensions.ideapad-mode
-    gnomeExtensions.remove-alttab-delay-v2
     gnomeExtensions.rounded-corners
     gnomeExtensions.rounded-window-corners
-    gnomeExtensions.spotify-tray
-    gnomeExtensions.syncthing-indicator
-    gnomeExtensions.toggle-alacritty
     gnomeExtensions.transparent-window-moving
     gnomeExtensions.unite
   ];
@@ -118,6 +109,9 @@ in
     enable = true;
     package = pkgs.gnomeExtensions.gsconnect;
   };
+
+  # The new GNOME console sucks
+  programs.gnome-terminal.enable = true;
 
   # Enable the GNOME keyring
   services.gnome.gnome-keyring.enable = true;

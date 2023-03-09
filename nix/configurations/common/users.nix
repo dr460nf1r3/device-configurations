@@ -1,4 +1,5 @@
-{ keys, lib, config, home-manager, ... }: {
+{ keys, lib, config, home-manager, ... }:
+{
   # All users are immuntable; if a password is required it needs to be set via passwordFile
   users.mutableUsers = false;
   # This is for easy configuration roll-out

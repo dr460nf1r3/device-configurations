@@ -1,5 +1,6 @@
-{ pkgs, ... }: {
-  # List packages
+{ pkgs, ... }:
+{
+  # List all of the packages
   environment.systemPackages = with pkgs; [
     ansible
     bind.dnsutils
@@ -53,13 +54,11 @@
   # Wireshark
   programs.wireshark.enable = true;
 
-  # Virtualisation / Containerization
+  # Libvirt & Podman with docker alias
   virtualisation = {
-    # Libvirt
     libvirtd = {
       enable = true;
     };
-    # Podman with Docker alias
     podman = {
       enable = true;
       dockerCompat = true;
