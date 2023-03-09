@@ -2,18 +2,17 @@
   # List packages
   environment.systemPackages = with pkgs; [
     ansible
-    bind.dnsutils # "dig"
+    bind.dnsutils
     gitkraken
     heroku
     hugo
     jdk8
     jetbrains.pycharm-professional
     keybase-gui
-    logstalgia # Chaotic
-    nixpkgs-fmt
     nixos-generators
-    shellcheck # Bash-dev
-    shfmt # Bash-dev
+    nixpkgs-fmt
+    shellcheck
+    shfmt
     teamviewer
     termius
     ventoy-bin-full
@@ -33,6 +32,7 @@
         ms-vscode.hexeditor
         ms-vsliveshare.vsliveshare
         njpwerner.autodocstring
+        pkief.material-product-icons
         redhat.vscode-xml
         redhat.vscode-yaml
         timonwong.shellcheck
@@ -40,13 +40,10 @@
       ];
     })
     xdg-utils
-    yarn # Front-dev
+    yarn
   ];
 
-  # Enable Wayland for vscode
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
-  # Enable services (automatically includes their apps' packages)
+  # Enable Keybase & its filesystem
   # services.kbfs.enable = true;
   # services.keybase.enable = true;
 
@@ -58,16 +55,9 @@
 
   # Virtualisation / Containerization
   virtualisation = {
-    # Virtualbox
-    virtualbox.host = {
+    # Libvirt
+    libvirtd = {
       enable = true;
-      enableExtensionPack = true;
-    };
-    # VMware workstation
-    vmware.host = {
-      enable = true;
-      #extraConfig = ''
-      #'';
     };
     # Podman with Docker alias
     podman = {

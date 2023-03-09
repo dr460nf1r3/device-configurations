@@ -77,6 +77,21 @@
     },
     "flake-utils": {
       "locked": {
+        "lastModified": 1659877975,
+        "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "c0e246b9b83f637f4681389ecabcb2681b4f3af0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_2": {
+      "locked": {
         "lastModified": 1667395993,
         "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
         "owner": "numtide",
@@ -160,10 +175,31 @@
         "url": "https://github.com/dr460nf1r3.keys"
       }
     },
+    "nix-minecraft": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixos-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1678324085,
+        "narHash": "sha256-pvojWiETcJcM3yaVx/0+DTJnId1Tf62ymYqGCKF/hjw=",
+        "owner": "misterio77",
+        "repo": "nix-minecraft",
+        "rev": "64b91c64809f3598ab96cff5108356081e5de2cf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "misterio77",
+        "repo": "nix-minecraft",
+        "type": "github"
+      }
+    },
     "nix-vscode-extensions": {
       "inputs": {
         "flake-compat": "flake-compat",
-        "flake-utils": "flake-utils",
+        "flake-utils": "flake-utils_2",
         "nixpkgs": "nixpkgs"
       },
       "locked": {
@@ -248,6 +284,7 @@
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "keys_nico": "keys_nico",
+        "nix-minecraft": "nix-minecraft",
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nixos-unstable": "nixos-unstable",
         "nur": "nur",

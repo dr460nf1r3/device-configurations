@@ -5,10 +5,6 @@
   home.stateVersion = "22.11";
   home.username = "nico";
 
-  # Personally used packages
-  #home.packages = with pkgs; [
-  #];
-
   # Application user configuration
   programs = {
     bash = {
@@ -21,12 +17,12 @@
     };
     bat = {
       enable = true;
-      config = { theme = "Gruvbox"; };
+      config = { theme = "gruvbox-dark"; };
     };
     btop = {
       enable = true;
       settings = {
-        color_theme = "TTY";
+        color_theme = "gruvbox-dark";
         proc_tree = true;
         theme_background = false;
       };
@@ -76,7 +72,11 @@
       };
       userEmail = "root@dr460nf1r3.org";
       userName = "Nico Jensch";
+      #signing = {
+      #  signByDefault = true;
+      #};
     };
+    gitui.enable = true;
     starship = {
       enable = true;
       settings = {
@@ -98,7 +98,7 @@
           style = "purple";
           truncate_to_repo = true;
           truncation_length = 0;
-          truncation_symbol = "repo = ";
+          truncation_symbol = "repo: ";
         };
         status = {
           disabled = false;
@@ -117,7 +117,7 @@
       clock24 = true;
       enable = true;
       extraConfig = ''
-        set-option -ga terminal-overrides ";*256col* =Tc;alacritty =Tc"
+        set-option -ga terminal-overrides ",*256col*:Tc,alacritty:Tc"
       '';
       historyLimit = 10000;
       newSession = true;
@@ -129,6 +129,9 @@
   services.pulseeffects = {
     enable = true;
   };
+  # GPG for Yubikey
+  services.gpg-agent.enableExtraSocket = true;
+  services.gpg-agent.enableScDaemon = true;
   # Icon themes
   gtk = {
     enable = true;
@@ -159,20 +162,15 @@
     "org/gnome/shell" = {
       disable-user-extensions = false;
       enabled-extensions = [
-        #"user-theme@gnome-shell-extensions.gcampax.github.com"
         "gsconnect@andyholmes.github.io"
-        #"dash-to-dock@micxgx.gmail.com"
-        #"desktop-cube@schneegans.github.com"
-        #"unite@hardpixel.eu"
-        #"github.notifications@alexandre.dufournet.gmail.com"
-        #"expandable-notifications@kaan.g.inam.org"
-        #"gnome-clipboard@b00f.github.i"
-        #"rounded-window-corners@yilozt.shell-extension"
+        "dash-to-dock@micxgx.gmail.com"
+        "unite@hardpixel.eu"
+        "expandable-notifications@kaan.g.inam.org"
+        "rounded-window-corners@yilozt.shell-extension"
+        "gnomeExtensions.pano"
         #"projectmanagerforvscode@ahmafi.ir"
         #"toggle-alacritty@itstime.tech"
-        "blur-my-shell@aunetx"
-        #"dash2dock-lite@icedman.github.com"
-        #"useless-gaps@pimsnel.com"
+        #"blur-my-shell@aunetx"
         #"sp-tray@sp-tray.esenliyim.github.com"
       ];
       favorite-apps = [
@@ -185,28 +183,30 @@
         "thunderbird.desktop"
       ];
     };
-    # Configure blur-my-shell
-    "org/gnome/shell/extensions/blur-my-shell" = {
-      brightness = 0.85;
-      dash-opacity = 0.25;
-      sigma = 15; # Sigma means blur amount
-      static-blur = true;
+    "org/gtk/gtk4/settings/file-chooser".show-hidden = true;
+    "org/gnome/shell/extensions/unite" = {
+      desktop-name-text = "Nixed GNOME";
+      greyscale-tray-icons = true;
+      hideActivitiesButton = 1;
+      notificationsPosition = 2;
+      window-buttons-theme = "Adwaita";
+      windowStates = 2;
     };
-    "org/gtk/gtk4/settings/file-chooser" = { show-hidden = true; };
-    "org/gnome/shell/extensions/blur-my-shell/panel".blur = false;
-    "org/gnome/shell/extensions/blur-my-shell/appfolder" = {
-      blur = true;
-      style-dialogs = 0;
+    "org/gnome/shell/extensions/dash-to-dock" = {
+      transparency-mode = 3;
+      running-indicator-style = 4;
+      show-trash = false;
+
     };
-    "org/gnome/settings-daemon/plugins/color" = { night-light-enabled = true; };
     "com/github/wwmm/pulseeffects" = { use-dark-theme = true; };
+    "org/gnome/calculator" = { button-mode = "programming"; };
     "org/gnome/desktop/interface" = { font-name = "Fira Sans 10"; };
-    "org/gnome/desktop/interface/font-name/org/gnome/desktop/interface" = { document-font-name = "Fira Sans 11"; };
     "org/gnome/desktop/interface" = { monospace-font-name = "JetBrains Mono 10"; };
+    "org/gnome/desktop/interface/font-name/org/gnome/desktop/interface" = { document-font-name = "Fira Sans 11"; };
     "org/gnome/desktop/peripherals/touchpad" = { tap-to-click = true; };
     "org/gnome/desktop/privacy" = { recent-files-max-age = 30; };
     "org/gnome/desktop/screensaver" = { lock-delay = lib.hm.gvariant.mkUint32 120; };
-    "org/gnome/desktop/wm/preferences" = { button-layout = "close;minimize=appmenu"; };
+    "org/gnome/desktop/wm/preferences" = { button-layout = "close,minimize:appmenu"; };
     "org/gnome/desktop/wm/preferences" = { titlebar-font = "Fira Sans Bold 11"; };
     "org/gnome/mutter" = { center-new-windows = true; };
     "org/gnome/mutter" = { workspaces-only-on-primary = false; };
@@ -293,5 +293,16 @@
       width = 260;
       wine = true;
     };
+  };
+  # Fix ugly missing desktop icon
+  xdg.desktopEntries."btop++" = {
+    name = "btop";
+    exec = "btop";
+    icon = "utilities-system-monitor";
+    comment = "A cross-platform graphical process/system monitor";
+    genericName = "System Monitor";
+    categories = [ "System" "Utility" ];
+    terminal = true;
+    type = "Application";
   };
 }

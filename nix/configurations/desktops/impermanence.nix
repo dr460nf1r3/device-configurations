@@ -4,7 +4,7 @@ let
   cfgZfs = config.boot.zfs;
 in
 {
-  # Reset rootfs
+  # Reset rootfs on shutdown
   systemd.shutdownRamfs.contents."/etc/systemd/system-shutdown/zpool".source =
     lib.mkForce
       (pkgs.writeShellScript "zpool-sync-shutdown" ''
@@ -21,11 +21,14 @@ in
       "/etc/NetworkManager/system-connections"
       "/etc/nixos"
       "/etc/ssh"
+      "/var/cache/chaotic"
       "/var/lib/bluetooth"
       "/var/lib/containers"
       "/var/lib/flatpak"
       "/var/lib/systemd"
       "/var/lib/upower"
+      "/var/lib/waydroid"
+      "/var/lib/zerotier-one"
       { directory = "/var/lib/iwd"; mode = "u=rwx,g=,o="; }
     ];
     files = [
@@ -34,47 +37,50 @@ in
     users.root = {
       home = "/root";
       directories = [
-        ".android" # adb keys
         { directory = ".gnupg"; mode = "0700"; }
         { directory = ".ssh"; mode = "0700"; }
       ];
     };
     users.nico = {
       directories = [
-        ".android" # adb keys
+        ".android"
         ".ansible"
-        ".config/asciinema"
-        ".config/chromium"
         ".config/Code"
-        ".config/discord"
-        ".config/evolution"
         ".config/GitKraken"
-        ".config/goa-1.0"
-        ".config/gsconnect"
-        ".config/Nextcloud"
         ".config/JetBrains"
-        ".config/obs-studio"
+        ".config/Nextcloud"
         ".config/PulseEffects"
-        ".config/spotify"
         ".config/Termius"
         ".config/VirtualBox"
+        ".config/asciinema"
+        ".config/chromium"
+        ".config/discord"
+        ".config/evolution"
+        ".config/goa-1.0"
+        ".config/gsconnect"
+        ".config/lutris"
+        ".config/obs-studio"
+        ".config/spotify"
+        ".config/teams-for-linux"
         ".gitkraken"
-        ".local/share/containers"
-        ".local/share/fish"
-        ".local/share/heroku"
-        { directory = ".local/share/keyrings"; mode = "0700"; }
-        ".local/share/nautilus"
+        ".java"
+        ".local/share/JetBrains"
         ".local/share/Nextcloud"
         ".local/share/Steam"
         ".local/share/TelegramDesktop"
-        ".local/share/tor-browser"
-        ".local/share/JetBrains"
         ".local/share/Vorta"
+        ".local/share/containers"
+        ".local/share/evolution"
+        ".local/share/fish"
+        ".local/share/gnome-photos"
+        ".local/share/gvfs-metadata"
+        ".local/share/heroku"
+        ".local/share/lutris"
+        ".local/share/nautilus"
+        ".local/share/tor-browser"
         ".local/share/waydroid"
-        ".mozilla"
-        ".java"
         ".thunderbird"
-        ".vmware"
+        ".yubico"
         "Documents"
         "Downloads"
         "Music"
@@ -85,6 +91,7 @@ in
         { directory = ".config/Keybase"; mode = "0700"; }
         { directory = ".gnupg"; mode = "0700"; }
         { directory = ".local/share/keybase"; mode = "0700"; }
+        { directory = ".local/share/keyrings"; mode = "0700"; }
         { directory = ".secrets"; mode = "0700"; }
         { directory = ".ssh"; mode = "0700"; }
       ];
@@ -105,20 +112,18 @@ in
     users.nico = {
       directories = [
         ".cache/chromium"
+        ".cache/evolution"
         ".cache/keybase"
+        ".cache/lutris"
         ".cache/mesa_shader_cache"
-        ".cache/mozilla"
         ".cache/nix-index"
         ".cache/spotify"
         ".cache/thunderbird"
+        ".cache/tracker3"
         ".local/share/Trash"
         ".local/state/wireplumber"
         ".steam"
       ];
     };
   };
-
-  # Shadow can't be added to persistent
-  #users.users."root".passwordFile = "/var/persistent/secrets/shadow/root";
-  #users.users."nico".passwordFile = "/var/persistent/secrets/shadow/pedrohlc";
 }

@@ -1,21 +1,21 @@
 { pkgs, ... }:
 {
   # Command line settings
-  environment.systemPackages = with pkgs; [ 
+  environment.systemPackages = with pkgs; [
     (chromium.override {
       commandLineArgs = [
-        "--enable-gpu-rasterization"
-        "--enable-vulkan"
         "--enable-accelerated-2d-canvas"
         "--enable-features=VaapiVideoDecoder"
         "--enable-features=WebUIDarkMode"
         "--enable-gpu-rasterization"
+        "--enable-gpu-rasterization"
+        "--enable-vulkan"
         "--enable-zero-copy"
         "--ignore-gpu-blocklist"
         "--ozone-platform-hint=auto"
       ];
     })
-   ];
+  ];
   # Basic chromium settings
   programs.chromium = {
     defaultSearchProviderEnabled = true;
@@ -25,9 +25,9 @@
     extensions = [
       "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock origin
       "eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark Reader
+      "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
       "njdfdhgcmkocbgbhcioffdbicglldapd" # LocalCDN
       "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
-      "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
     ];
     extraOpts = {
       "HomepageLocation" = "https://search.dr460nf1r3.org";

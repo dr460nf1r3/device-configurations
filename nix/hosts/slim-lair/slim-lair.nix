@@ -1,12 +1,10 @@
 { config, pkgs, lib, ... }: {
   # Individual settings
   imports = [
-    ./common/common.nix
-    ./common/desktops.nix
-    ./common/development.nix
-    ./common/gnome.nix
-    ./common/impermanence.nix
-    ./hardware-configuration/slim-lair.nix
+    ../../configurations/chaotic.nix
+    ../../configurations/common.nix
+    ../../configurations/desktops.nix
+    ./hardware-configuration.nix
   ];
 
   # Use the systemd-boot EFI boot loader
@@ -45,8 +43,7 @@
 
   # Network configuration - id for ZFS
   networking.hostName = "slim-lair";
-  networking.hostId =
-    (builtins.substring 0 8 (builtins.readFile "/etc/machine-id"));
+  networking.hostId = (builtins.substring 0 8 (builtins.readFile "/etc/machine-id"));
 
   # SSD
   services.fstrim.enable = true;
@@ -55,23 +52,16 @@
   services.xserver.videoDrivers = [ "amdgpu" ];
   services.hardware.bolt.enable = false;
 
-  # OpenGL support
-  hardware.opengl = {
-    driSupport = lib.mkDefault true;
-    driSupport32Bit = lib.mkDefault true;
-  };
-
   # Virtualisation / Containerization
   virtualisation.containers.storage.settings = {
     storage = {
       driver = "zfs";
       graphroot = "/var/lib/containers/storage";
       runroot = "/run/containers/storage";
-    };
-
-    storage.options.zfs = {
-      fsname = "zroot/containers";
-      mountopt = "nodev";
+      options.zfs = {
+        fsname = "zroot/containers";
+        mountopt = "nodev";
+      };
     };
   };
 
@@ -80,7 +70,7 @@
 
   # Fix the monitors
   home-manager.users.nico = { lib, ... }: {
-    home.file.".config/monitors.xml".source = ./assets/monitors-slim-lair.xml;
+    home.file.".config/monitors.xml".source = ./monitors-slim-lair.xml;
   };
 
   # I can't be bothered to upgrade this manually

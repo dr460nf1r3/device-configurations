@@ -14,4 +14,4 @@
         src: "nix/flake.lock"
         dest: "/etc/nixos/flake.lock"
     - name: Update and build system
-      shell: nixos-rebuild boot
+      shell: nixos-rebuild boot --impure

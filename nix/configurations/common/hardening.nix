@@ -1,5 +1,4 @@
-{ config, ... }:
-
+{ config, pkgs, ... }:
 {
   # Disable coredumps
   systemd.coredump.enable = false;
@@ -19,9 +18,6 @@
     };
   };
 
-  # Default configured for ssh
-  services.fail2ban.enable = true;
-
   # The hardening profile enables Apparmor by default, we don't want this to happen
   security.apparmor.enable = false;
 
@@ -31,6 +27,9 @@
 
   # Don't lock kernel modules, this is also enabled by the hardening profile by default
   security.lockKernelModules = false;
+
+  # Run security analysis
+  environment.systemPackages = with pkgs; [ lynis ];
 
   # Prevent TOFU MITM
   programs.ssh.knownHosts = {

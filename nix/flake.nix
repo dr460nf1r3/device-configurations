@@ -15,6 +15,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixos-unstable";
     };
+    nix-minecraft = {
+      url = "github:misterio77/nix-minecraft";
+      inputs.nixpkgs.follows = "nixos-unstable";
+    };
     # Nix user repository
     nur.url = github:nix-community/NUR;
     # My keys
@@ -40,8 +44,8 @@
       specialArgs = {
         sources = {
           chaotic-toolbox = attrs.src-chaotic-toolbox;
-          repoctl = attrs.src-repoctl;
           nixpkgs = nixos-unstable;
+          repoctl = attrs.src-repoctl;
         };
         keys = { nico = attrs.keys_nico; };
       };
@@ -61,16 +65,21 @@
     {
       # Defines a formatter for "nix fmt"
       formatter.x86_64-linux = nixos-unstable.legacyPackages.x86_64-linux.nixpkgs-fmt;
+
       # All the systems
       nixosConfigurations."nixos-tv" = nixos.lib.nixosSystem {
         inherit system;
+        modules = defaultModules ++ [ ./hosts/nixos-tv/nixos-tv.nix ];
         specialArgs = specialArgs;
-        modules = defaultModules ++ [ ./nixos-tv.nix ];
       };
       nixosConfigurations."slim-lair" = nixos.lib.nixosSystem {
         inherit system;
+        modules = defaultModules ++ [
+          ./hosts/slim-lair/slim-lair.nix
+          stylix.nixosModules.stylix
+          impermanence.nixosModules.impermanence
+        ];
         specialArgs = specialArgs;
-        modules = defaultModules ++ [ ./slim-lair.nix stylix.nixosModules.stylix impermanence.nixosModules.impermanence ];
       };
     };
 }
