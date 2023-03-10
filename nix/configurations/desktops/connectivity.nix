@@ -9,6 +9,6 @@
   # Bluetooth
   hardware.bluetooth.enable = true;
 
-  # Special apps
+  # In case I need to fix my phone & Waydroid
   programs.adb.enable = true;
 }

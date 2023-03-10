@@ -33,7 +33,7 @@
         ms-vscode.hexeditor
         ms-vsliveshare.vsliveshare
         njpwerner.autodocstring
-        pkief.material-product-icons
+        pkief.material-icon-theme
         redhat.vscode-xml
         redhat.vscode-yaml
         timonwong.shellcheck

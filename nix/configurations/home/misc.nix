@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   # MangoHUD to monitor performance while gaming
   programs.mangohud = {
@@ -42,6 +42,22 @@
       gpu-api = "vulkan";
       # YouTube quality
       ytdl-format = "bestvideo[height<=?2160]+bestaudio/best";
+    };
+  };
+
+  # Alacritty, the terminal emulator
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      font = {
+        normal = { family = "Jetbrains Mono Nerd Font"; };
+        size = 11.0;
+      };
+      window.opacity = 0.9;
+      shell = {
+        program = "${pkgs.fish}/bin/fish";
+        args = [ "--login" ];
+      };
     };
   };
 }

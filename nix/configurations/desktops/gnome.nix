@@ -63,19 +63,19 @@ in
   # Style the operating system using Stylix
   stylix.base16Scheme = "${base16-schemes}/gruvbox-dark-hard.yaml";
   stylix.image = pkgs.fetchurl {
-    url = "https://raw.githubusercontent.com/FrenzyExists/wallpapers/main/Gruv/grub-coffee.png";
-    sha256 = "sha256-9kOtRpFefKgFLR3gFRfICLwqU3NhjPezDtNTKSuvzIc=";
+    url = "https://gruvbox-wallpapers.onrender.com/wallpapers/anime/wall.jpg";
+    sha256 = "sha256-Dt5A3cA5M+g82RiZn1cbD7CVzAz/b8c1nTEpkp273/s=";
   };
   stylix.polarity = "dark";
   stylix.fonts = {
     serif = config.stylix.fonts.sansSerif;
     sansSerif = {
       package = pkgs.fira;
-      name = "Fira Sans 10";
+      name = "Fira Sans";
     };
     monospace = {
       package = pkgs.jetbrains-mono;
-      name = "Jetbrains Mono";
+      name = "Jetbrains Mono Nerd Font";
     };
     emoji = {
       package = pkgs.noto-fonts-emoji;
@@ -85,16 +85,13 @@ in
 
   # Additional GNOME packages not included by default
   environment.systemPackages = with pkgs; [
-    gnome.dconf-editor
     gnome.gnome-boxes
     gnome.gnome-tweaks
     gnomeExtensions.expandable-notifications
-    gnomeExtensions.github-notifications
     gnomeExtensions.gsconnect
-    gnomeExtensions.rounded-corners
-    gnomeExtensions.rounded-window-corners
-    gnomeExtensions.transparent-window-moving
+    gnomeExtensions.pano
     gnomeExtensions.unite
+    xfce.thunar
   ];
   services.dbus.packages = [ pkgs.dconf ];
   services.geoclue2.enable = true;

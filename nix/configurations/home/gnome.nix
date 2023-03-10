@@ -20,12 +20,8 @@
       window-maximized = false;
       window-size = lib.hm.gvariant.mkTuple [ 768 600 ];
     };
-    "org/gnome/control-center" = {
-      last-panel = "online-accounts";
-      window-state = lib.hm.gvariant.mkTuple [ 980 640 ];
-    };
     "org/gnome/desktop/app-folders" = {
-      folder-children = [ "Utilities" "YaST" ];
+      folder-children = [ "Utilities" ];
     };
     "org/gnome/desktop/input-sources" = {
       sources = [ (lib.hm.gvariant.mkTuple [ "xkb" "de" ]) ];
@@ -74,14 +70,12 @@
       sleep-inactive-ac-type = "nothing";
     };
     "org/gnome/shell" = {
-      disable-user-extensions = true;
+      disable-user-extensions = false;
       enabled-extensions = [
-        "gsconnect@andyholmes.github.io"
-        "dash-to-dock@micxgx.gmail.com"
-        "unite@hardpixel.eu"
         "expandable-notifications@kaan.g.inam.org"
-        "rounded-window-corners@yilozt.shell-extension"
         "gnomeExtensions.pano"
+        "gsconnect@andyholmes.github.io"
+        "unite@hardpixel.eu"
       ];
       favorite-apps = [
         "org.gnome.Terminal.desktop"
@@ -93,11 +87,6 @@
         "gitkraken.desktop"
         "code.desktop"
       ];
-    };
-    "org/gnome/shell/extensions/dash-to-dock" = {
-      running-indicator-style = 4;
-      show-trash = false;
-      transparency-mode = 3;
     };
     "org/gnome/shell/extensions/gsconnect" = {
       id = "a4f40bf4-47db-47b6-9fda-a4c71d9f2893";
@@ -123,15 +112,16 @@
       greyscale-tray-icons = true;
       hideActivitiesButton = 1;
       notificationsPosition = 2;
+      show-window-buttons = "never";
       window-buttons-theme = "adwaita";
-      windowStates = 2;
+      windowStates = 0;
     };
     "org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9" = {
       bold-is-bright = true;
       cursor-blink-mode = "on";
       cursor-shape = "ibeam";
       custom-command = "${pkgs.fish}/bin/fish";
-      font = "JetBrains Mono 12";
+      font = "JetBrains Mono Nerd Font 12";
       login-shell = false;
       use-custom-command = true;
       use-system-font = false;

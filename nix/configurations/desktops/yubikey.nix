@@ -5,8 +5,8 @@
   services.udev.packages = [ pkgs.yubikey-personalization ];
   services.pcscd.enable = true;
   security.pam.yubico = {
-    enable = true;
     debug = false;
+    enable = true;
     mode = "challenge-response";
   };
 }

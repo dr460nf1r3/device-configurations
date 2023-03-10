@@ -37,20 +37,4 @@
     enableExtraSocket = true;
     enableScDaemon = true;
   };
-
-  # Alacritty, the terminal emulator
-  programs.alacritty = {
-    enable = true;
-    settings = {
-      font = {
-        normal = { family = "Jetbrains Mono"; };
-        size = 11.0;
-      };
-      window.opacity = 0.9;
-      shell = {
-        program = "${pkgs.fish}/bin/fish";
-        args = [ "--login" ];
-      };
-    };
-  };
 }

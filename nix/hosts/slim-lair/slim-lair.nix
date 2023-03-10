@@ -79,4 +79,3 @@
   # NixOS stuff
   system.stateVersion = "22.11";
 }
-
