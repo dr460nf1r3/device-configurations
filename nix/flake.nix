@@ -8,6 +8,8 @@
     stylix.url = "github:danth/stylix";
     # All of the VSCode extensions not available in Nixpkgs
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    # Fancy Gruvbox Spotify
+    spicetify-nix.url = github:the-argus/spicetify-nix;
     # Reset rootfs every reboot
     impermanence.url = "github:nix-community/impermanence";
     # Home management - https://github.com/nix-community/home-manager/issues/3671
@@ -61,6 +63,7 @@
         "${nixos}/nixos/modules/profiles/hardened.nix"
         home-manager.nixosModules.home-manager
         overlay-unstable
+        stylix.nixosModules.stylix
       ];
     in
     {
@@ -70,14 +73,15 @@
       # All the systems
       nixosConfigurations."nixos-tv" = nixos.lib.nixosSystem {
         inherit system;
-        modules = defaultModules ++ [ ./hosts/nixos-tv/nixos-tv.nix ];
+        modules = defaultModules ++ [
+          ./hosts/nixos-tv/nixos-tv.nix
+        ];
         specialArgs = specialArgs;
       };
       nixosConfigurations."slim-lair" = nixos.lib.nixosSystem {
         inherit system;
         modules = defaultModules ++ [
           ./hosts/slim-lair/slim-lair.nix
-          stylix.nixosModules.stylix
           impermanence.nixosModules.impermanence
         ];
         specialArgs = specialArgs;

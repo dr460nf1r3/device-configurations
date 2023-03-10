@@ -1,4 +1,7 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, spicetify-nix, ... }:
+let
+  spicePkgs = spicetify-nix.packages.${pkgs.system}.default;
+in
 {
   # Import individual configuration snippets
   imports = [
@@ -6,6 +9,7 @@
     ./misc.nix
     ./shells.nix
     ./theming.nix
+    spicetify-nix.homeManagerModule
   ];
 
   # Always needed home-manager settings - don't touch!
@@ -37,4 +41,15 @@
     enableExtraSocket = true;
     enableScDaemon = true;
   };
+
+  # Spicetify - this is currently giving an infinite recursion error
+  # programs.spicetify =
+  #   {
+  #     enable = true;
+  #     theme = spicePkgs.themes.catppuccin-mocha;
+  #     colorScheme = "flamingo";
+  #     enabledExtensions = with spicePkgs.extensions; [
+  #       fullAppDisplay
+  #     ];
+  #   };
 }
