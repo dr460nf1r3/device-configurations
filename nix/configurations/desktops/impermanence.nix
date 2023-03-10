@@ -81,7 +81,6 @@ in
         ".local/share/waydroid"
         ".thunderbird"
         ".var"
-        ".yubico"
         "Documents"
         "Downloads"
         "Music"
@@ -89,12 +88,14 @@ in
         "Pictures"
         "Sync"
         "Videos"
+        { directory = ".config/Bitwarden CLI"; mode = "0700"; }
         { directory = ".config/Keybase"; mode = "0700"; }
         { directory = ".gnupg"; mode = "0700"; }
         { directory = ".local/share/keybase"; mode = "0700"; }
         { directory = ".local/share/keyrings"; mode = "0700"; }
         { directory = ".secrets"; mode = "0700"; }
         { directory = ".ssh"; mode = "0700"; }
+        { directory = ".yubico"; mode = "0700"; }
       ];
       files = [
         ".cache/keybasekeybase.app.serverConfig"

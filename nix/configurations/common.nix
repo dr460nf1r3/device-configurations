@@ -1,4 +1,6 @@
 { pkgs, inputs, ... }:
 {
-  imports = [ ./common/common.nix ];
+  imports = [ 
+    ./common/common.nix
+  ];
 }

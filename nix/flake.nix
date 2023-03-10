@@ -8,8 +8,13 @@
     stylix.url = "github:danth/stylix";
     # All of the VSCode extensions not available in Nixpkgs
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    # In case I need to generate a build
+    # nixos-generators = {
+    #   url = "github:nix-community/nixos-generators";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     # Fancy Gruvbox Spotify
-    spicetify-nix.url = github:the-argus/spicetify-nix;
+    # spicetify-nix.url = github:the-argus/spicetify-nix;
     # Reset rootfs every reboot
     impermanence.url = "github:nix-community/impermanence";
     # Home management - https://github.com/nix-community/home-manager/issues/3671
@@ -83,6 +88,14 @@
         modules = defaultModules ++ [
           ./hosts/slim-lair/slim-lair.nix
           impermanence.nixosModules.impermanence
+        ];
+        specialArgs = specialArgs;
+      };
+      # To-do 
+      nixosConfigurations."live-usb" = nixos.lib.nixosSystem {
+        inherit system;
+        modules = defaultModules ++ [
+          ./hosts/live-usb/live-usb.nix
         ];
         specialArgs = specialArgs;
       };

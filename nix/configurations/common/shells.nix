@@ -4,6 +4,7 @@
     bash.shellAliases = {
       # General useful things & theming
       "bat" = "bat --style header --style snip --style changes";
+      "buildiso" = "nix-shell -p nixos-generators --run \'nixos-generate --format iso --configuration ./buildiso.nix -o result\'";
       "cls" = "clear";
       "dd" = "dd progress=status";
       "dir" = "dir --color=auto";
@@ -35,6 +36,7 @@
         completions.enable = true;
       };
       shellAbbrs = {
+        "buildiso" = "nix-shell -p nixos-generators --run \'nixos-generate --format iso --configuration ./buildiso.nix -o result\'";
         "cls" = "clear";
         "gcommit" = "git commit -m";
         "glcone" = "git clone";

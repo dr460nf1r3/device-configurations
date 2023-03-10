@@ -19,6 +19,7 @@
     extraGroups = [
       "adbusers"
       "audio"
+      "chaotic_op"
       "disk"
       "docker"
       "networkmanager"
