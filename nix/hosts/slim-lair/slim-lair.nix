@@ -66,15 +66,12 @@
   };
 
   # Enable the touchpad
-  environment.systemPackages = with pkgs; [ libinput libinput-gestures ];
+  environment.systemPackages = with pkgs; [ libinput ];
 
-  # Fix the monitors
+  # Fix the monitor setup
   home-manager.users.nico = { lib, ... }: {
-    home.file.".config/monitors.xml".source = ./monitors-slim-lair.xml;
+    home.file.".config/monitors.xml".source = ./monitors.xml;
   };
-
-  # I can't be bothered to upgrade this manually
-  system.autoUpgrade.enable = true;
 
   # NixOS stuff
   system.stateVersion = "22.11";

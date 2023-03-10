@@ -15,6 +15,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixos-unstable";
     };
+    # Prismlauncher
     nix-minecraft = {
       url = "github:misterio77/nix-minecraft";
       inputs.nixpkgs.follows = "nixos-unstable";

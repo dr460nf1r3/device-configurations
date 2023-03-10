@@ -17,6 +17,10 @@
       allowed-users = [ "@wheel" ];
       # Allow using flakes
       auto-optimise-store = true;
+      # github:nix-community/* cache
+      extra-substituters = [ "https://nix-community.cachix.org" ];
+      extra-trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
+      # This is a flake after all
       experimental-features = [ "nix-command" "flakes" ];
       max-jobs = "auto";
       trusted-users = [ "root" "nico" ];

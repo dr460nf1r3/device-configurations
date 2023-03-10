@@ -47,7 +47,7 @@
 
   # Alacritty, the terminal emulator
   programs.alacritty = {
-    enable = true;
+    enable = false;
     settings = {
       font = {
         normal = { family = "Jetbrains Mono Nerd Font"; };

@@ -6,6 +6,8 @@ let
     rev = "cf6bc89";
     sha256 = "U9pfie3qABp5sTr3M9ga/jX8C807FeiXlmEZnC4ZM58=";
   };
+  monitorsXmlContent = builtins.readFile ../../hosts/slim-lair/monitors.xml;
+  monitorsConfig = pkgs.writeText "gdm_monitors.xml" monitorsXmlContent;
 in
 {
   # Enable GNOME desktop environment with autologin
@@ -24,7 +26,7 @@ in
     };
   };
 
-  # Enable Wayland for Electron apps
+  # Enable Wayland for a lot of apps
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # Needed fix for autologin
@@ -32,33 +34,6 @@ in
     "autovt@tty1".enable = false;
     "getty@tty1".enable = false;
   };
-
-  # Exclude bloated packages
-  environment.gnome.excludePackages = (with pkgs; [
-    gnome-console
-    gnome-tour
-    gnome-user-docs
-  ])
-  ++ (with pkgs.gnome; [
-    atomix
-    cheese
-    epiphany
-    evince
-    gedit
-    gnome-characters
-    gnome-maps
-    gnome-music
-    gnome-software
-    gnome-terminal
-    gnome-weather
-    hitori
-    iagno
-    pkgs.gnome-text-editor
-    simple-scan
-    tali
-    totem
-    yelp
-  ]);
 
   # Style the operating system using Stylix
   stylix.base16Scheme = "${base16-schemes}/gruvbox-dark-hard.yaml";
@@ -83,6 +58,28 @@ in
     };
   };
 
+  # Remove a few applications that I don't like
+  environment.gnome.excludePackages = (with pkgs; [
+    gnome-console
+    gnome-photos
+    gnome-tour
+  ]) ++ (with pkgs.gnome; [
+    atomix
+    cheese
+    epiphany 
+    evince
+    geary
+    gedit
+    gnome-characters
+    gnome-music
+    hitori
+    iagno
+    pkgs.gnome-text-editor
+    simple-scan
+    tali
+    totem
+  ]);
+
   # Additional GNOME packages not included by default
   environment.systemPackages = with pkgs; [
     gnome.gnome-boxes
@@ -91,7 +88,6 @@ in
     gnomeExtensions.gsconnect
     gnomeExtensions.pano
     gnomeExtensions.unite
-    xfce.thunar
   ];
   services.dbus.packages = [ pkgs.dconf ];
   services.geoclue2.enable = true;
@@ -116,4 +112,9 @@ in
 
   # We might want to remote into this machine
   services.gnome.gnome-remote-desktop.enable = true;
+
+  # Apply monitor config on GDM
+  systemd.tmpfiles.rules = [
+    "L+ /run/gdm/.config/monitors.xml - - - - ${monitorsConfig}"
+  ];
 }
