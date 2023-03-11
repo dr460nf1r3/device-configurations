@@ -6,6 +6,7 @@
 {
   # Import individual configuration snippets
   imports = [
+    ./default-apps.nix
     ./gnome.nix
     ./misc.nix
     ./shells.nix

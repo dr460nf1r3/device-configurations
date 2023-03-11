@@ -9,9 +9,7 @@
     extensions = [
       "ajhmfdgkijocedmfjonnpjfojldioehi" # Privacy Pass
       "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock origin
-      "eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark Reader
       "hipekcciheckooncpjeljhnekcoolahp" # Tabliss
-      "jfnifeihccihocjbfcfhicmmgpjicaec" # GSConnect
       "kbfnbcaeplbcioakkpcpgfkobkghlhen" # Grammarly
       "mdjildafknihdffpkfmmpnpoiajfjnjd" # Consent-O-Matic
       "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
