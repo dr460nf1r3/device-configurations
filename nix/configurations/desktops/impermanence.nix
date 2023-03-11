@@ -27,7 +27,8 @@ in
       "/var/lib/flatpak"
       "/var/lib/systemd"
       "/var/lib/upower"
-      "/var/lib/waydroid"
+      "/var/lib/vnstat"
+      # "/var/lib/waydroid"
       "/var/lib/zerotier-one"
       { directory = "/var/lib/iwd"; mode = "u=rwx,g=,o="; }
     ];
@@ -78,8 +79,9 @@ in
         ".local/share/heroku"
         ".local/share/lutris"
         ".local/share/nautilus"
+        ".local/share/PrismLauncher"
         ".local/share/tor-browser"
-        ".local/share/waydroid"
+        # ".local/share/waydroid"
         ".mozilla"
         ".thunderbird"
         ".var"

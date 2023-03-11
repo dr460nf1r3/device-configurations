@@ -4,7 +4,7 @@
   environment.systemPackages = with pkgs; [
     lutris
     mangohud
-    prismlauncher
+    prismlauncher-mod
     (retroarch.override {
       cores = with libretro; [
         citra
