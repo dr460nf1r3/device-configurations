@@ -16,7 +16,6 @@
         editor = false;
       };
       efi.canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot/efi";
     };
     supportedFilesystems = [ "zfs" ];
     zfs = {
