@@ -1,7 +1,7 @@
-{ config, pkgs, lib, spicetify-nix, ... }:
-let
-  spicePkgs = spicetify-nix.packages.${pkgs.system}.default;
-in
+{ config, pkgs, lib, ... }:
+# let
+#   spicePkgs = spicetify-nix.packages.${pkgs.system}.default;
+# in
 {
   # Import individual configuration snippets
   imports = [
@@ -9,7 +9,7 @@ in
     ./misc.nix
     ./shells.nix
     ./theming.nix
-    spicetify-nix.homeManagerModule
+    # spicetify-nix.homeManagerModule
   ];
 
   # Always needed home-manager settings - don't touch!
