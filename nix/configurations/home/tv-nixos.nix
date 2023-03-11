@@ -8,6 +8,12 @@
       id = "a4f40eab-47db-47b6-9fda-a4c71d9f2893";
       name = "TV NixOS";
     };
+    "org/gnome/desktop/remote-desktop/rdp" = {
+      enable = true;
+      tls-cert = "/home/nico/.local/share/gnome-remote-desktop/rdp-tls.crt";
+      tls-key = "/home/nico/.local/share/gnome-remote-desktop/rdp-tls.key";
+      view-only = false;
+    };
     "org/gnome/shell/extensions/gsconnect/device/b7e645a0-b149-48a0-8fd8-81ab6bc5ef11" = {
       certificate-pem = "-----BEGIN CERTIFICATE-----\nMIIFpTCCA42gAwIBAgIUcvRMlpmA6RnVCiKvTuiBH2oExb4wDQYJKoZIhvcNAQEL\nBQAwYjEdMBsGA1UECgwUYW5keWhvbG1lcy5naXRodWIuaW8xEjAQBgNVBAsMCUdT\nQ29ubmVjdDEtMCsGA1UEAwwkYjdlNjQ1YTAtYjE0OS00OGEwLThmZDgtODFhYjZi\nYzVlZjExMB4XDTIzMDMwNzE5NDYzN1oXDTMzMDMwNDE5NDYzN1owYjEdMBsGA1UE\nCgwUYW5keWhvbG1lcy5naXRodWIuaW8xEjAQBgNVBAsMCUdTQ29ubmVjdDEtMCsG\nA1UEAwwkYjdlNjQ1YTAtYjE0OS00OGEwLThmZDgtODFhYjZiYzVlZjExMIICIjAN\nBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAxaBBOfKvLcZ/5sZM6bi3u5g1HbrY\ndR6zulol8q0XhH4NUrFilKG7le+47QBG9AJQk4/nlok/W1d7cCy23Sd3FYyIlIjh\nWCa1ecUL8C3JskqyVMuAx3VuxfyXBmM+6UCbaa3sHmxKxVm4KUeOGC8UIBg/AiCo\n5IOny3G/uopcop7zn2twmxcmURZPUgcrA+eRifAw9Q66oa3BVDSE8x+kL3JKDMQz\nkcTer9wUyqsdMtMpvy/vNfWfJrl2HGfTjQW5iPzJgZZLEzExtlDbuuUnmA/9WD0a\nyIcf+B1xregbTF2uefCG40RqYYaj9rqeskCuBU9D6DuLHZyiAcu/wbcbMKSojoqh\nNL4PkBGhWfFsDNTawSC8pJRVbRDQODHtw2TkaKJianw+gjFqnJYs416rTCZCjnRm\nUkHyqqgCE5govKQ3/BMpEqyFWhE4hRPnFanuh8b7FCd+K1FCbMnLv08gK8WBnqOK\nOp1aS4RzxMx6zszBv4nA7vKOql0OUEHpX2dLN0heD72SEVHIGdfCQ4FgOgh5VQ4H\n28JjKQUlf4ZCsm+zfmSHerkk7lEIG/1nyJH5wsQONqMV6tJLUqeExAwZUqFRyQuQ\nZMhRyRQ2sVa9TBg2ZACZKFyD/t9IT/bUqfsT4VM/KcD8AxN/sHdbkvB/PT4JNhYK\n5q3mTxlCKisX18cCAwEAAaNTMFEwHQYDVR0OBBYEFJMZUaWmNfJgFvXfNQj2uL4l\nu+S5MB8GA1UdIwQYMBaAFJMZUaWmNfJgFvXfNQj2uL4lu+S5MA8GA1UdEwEB/wQF\nMAMBAf8wDQYJKoZIhvcNAQELBQADggIBAAHvqE1sRJai6/wgNpVKhzS6/D6eJTWX\n9doypcWv3N2eIPJVqOxbSACNrTAbnz6OjkGCfR8mjWd6olg3/t7eGjO7vpXD8anj\na0de3124h4DNz7hjbGICZM7Tt2paInTS3cne3Kev5ajxbtDWWfLVBcqrtIp6w8fv\nXcb7NKqyfAKacpjn2cDP5VzOM+ql85bWERV6cDS0FyFWXUHn0EUALp5PqPcyCu8p\niY50wYsDm1OhqshxXa8kWTyJ8D84fk7A+7zcwc/gb6zcpD1fAj5pJW0tzljiwUzI\nUjuauOTWJ4euEafAgqntaPJTYfxztFpP5IAM/yDMctlhQfYLpAIohTR4JUaivzra\ncy14GQjo47o+wuPPJwijF+Tx/D96OOU4zIqkXv9FmYUOV+DjZgL5lehP5CNe/XP6\nkdAHjf0kWJzdOAbCgLNxTg5qcxHvMVR+OoJraP6MNIB34TzFFvAZTUsooPKARDuj\nZT7ktUW9lROCXQBQIagl2tRfS/BWccxAs3kV6w9UKXSFxgt3Tx/pDKfSlB7py6aN\nbySbVqUGtijtpgzGOx5dxjXGnLiJer99FcmYFQxS/lCrAKtJkl+0OB9D5YfluOcI\naAqWKIaXtlYZI8Ph6J/FNsE4mDVXCVCst59aeKhPdvLK9JOf93y2UUpbmD2MtK0z\n75h46brgIObg\n-----END CERTIFICATE-----\n";
       incoming-capabilities = [ "kdeconnect.battery" "kdeconnect.battery.request" "kdeconnect.clipboard" "kdeconnect.clipboard.connect" "kdeconnect.connectivity_report" "kdeconnect.contacts.response_uids_timestamps" "kdeconnect.contacts.response_vcards" "kdeconnect.findmyphone.request" "kdeconnect.mousepad.echo" "kdeconnect.mousepad.keyboardstate" "kdeconnect.mousepad.request" "kdeconnect.mpris" "kdeconnect.mpris.request" "kdeconnect.notification" "kdeconnect.notification.request" "kdeconnect.photo" "kdeconnect.photo.request" "kdeconnect.ping" "kdeconnect.presenter" "kdeconnect.runcommand" "kdeconnect.runcommand.request" "kdeconnect.sftp" "kdeconnect.share.request" "kdeconnect.sms.messages" "kdeconnect.systemvolume.request" "kdeconnect.telephony" ];
@@ -60,4 +66,6 @@
       '';
     };
   }
+
+
 }

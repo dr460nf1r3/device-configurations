@@ -43,6 +43,15 @@
     enableScDaemon = true;
   };
 
+  # Login with Yubikey - once we have secrets management
+  # home.file = {
+  #   ".yubico/challenge-18063966" = {
+  #     mode = "600";
+  #     text = ''
+  #     '';
+  #   };
+  # };
+
   # Spicetify - this is currently giving an infinite recursion error
   # programs.spicetify =
   #   {

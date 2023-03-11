@@ -73,6 +73,7 @@ in
         ".local/share/evolution"
         ".local/share/fish"
         ".local/share/gnome-photos"
+        ".local/share/gnome-remote-desktop"
         ".local/share/gvfs-metadata"
         ".local/share/heroku"
         ".local/share/lutris"

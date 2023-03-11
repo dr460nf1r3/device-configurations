@@ -123,13 +123,11 @@ in
 
   # The new GNOME console sucks
   programs.gnome-terminal.enable = true;
+  programs.gnome-documents.enable = true;
 
   # Enable the GNOME keyring
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.nico.enableGnomeKeyring = true;
-
-  # We might want to remote into this machine
-  services.gnome.gnome-remote-desktop.enable = true;
 
   # Apply monitor config on GDM
   systemd.tmpfiles.rules = [
