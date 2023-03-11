@@ -112,6 +112,7 @@ in
   # Additional GNOME packages not included by default
   environment.systemPackages = with pkgs; [
     dconf2nix
+    evince
     gnome.gnome-boxes
     gnome.gnome-tweaks
     gnomeExtensions.expandable-notifications
