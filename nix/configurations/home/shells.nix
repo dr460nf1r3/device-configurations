@@ -15,7 +15,7 @@
       enable = true;
       initExtra = ''
         if [ -z "$TMUX" ] &&  [ "$SSH_CLIENT" != "" ]; then
-          exec ${pkgs.fish}/bin/tmux
+          exec ${pkgs.tmux}/bin/tmux
         fi
       '';
       shellAliases = {
