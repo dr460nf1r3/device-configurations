@@ -2,10 +2,10 @@
 set -o errexit
 
 # Create EFI
-mkfs.vfat -F32 /dev/nvme0n1p1
+mkfs.vfat -F32 /dev/sda1
 
 # Create pool
-zpool create -f zroot /dev/nvme0n1p2
+zpool create -f zroot /dev/sda2
 zpool set autotrim=on zroot
 zfs set compression=zstd zroot
 zfs set mountpoint=none zroot
