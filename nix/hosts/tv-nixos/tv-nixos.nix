@@ -67,6 +67,41 @@
   # I can't be bothered to upgrade this manually
   system.autoUpgrade.enable = true;
 
+  # A few secrets
+  sops.secrets."host_keys/tv-nixos" = {
+    path = "/etc/ssh/ed_25519_keys";
+    mode = "0600";
+  };
+  sops.secrets."machine-id/tv-nixos" = {
+    path = "/etc/machine-id";
+    mode = "0600";
+  };
+  sops.secrets."gsconnect/tv-nixos/private" = {
+    path = "/home/nico/.config/gsconnect/private.pem";
+    mode = "0600";
+    owner = config.users.users.nico.name;
+  };
+  sops.secrets."gsconnect/tv-nixos/certificate" = {
+    path = "/home/nico/.config/gsconnect/certificate.pem";
+    mode = "0600";
+    owner = config.users.users.nico.name;
+  };
+  sops.secrets."login/id_ed25519" = {
+    mode = "0600";
+    owner = config.users.users.nico.name;
+    path = "/home/nico/.ssh/id_ed25519";
+  };
+  sops.secrets."api_keys/spotify-tui" = {
+    mode = "0600";
+    owner = config.users.users.nico.name;
+    path = "/home/nico/.config/spotify-tui/client.yml";
+  };
+  sops.secrets."api_keys/spotify-tui-token" = {
+    mode = "0600";
+    owner = config.users.users.nico.name;
+    path = "/home/nico/.config/spotify-tui/.spotify_token_cache.json";
+  };
+
   # NixOS stuff
   system.stateVersion = "22.11";
 }

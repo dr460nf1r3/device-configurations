@@ -2,17 +2,27 @@
 {
   # All users are immuntable; if a password is required it needs to be set via passwordFile
   users.mutableUsers = false;
+  
+  # This is needed for early set up of user accounts
+  sops.secrets."passwords/nico" = {
+    neededForUsers = true;
+  };
+  sops.secrets."passwords/root" = {
+    neededForUsers = true;
+  };
+
   # This is for easy configuration roll-out
   users.users.ansible = {
     extraGroups = [ "wheel" ];
     home = "/home/ansible";
     isNormalUser = true;
     openssh.authorizedKeys.keyFiles = [ keys.nico ];
+    password = "*";
     uid = 2000;
   };
   # Lock root password
   users.users.root = {
-    passwordFile = "/var/persistent/secrets/pass/root";
+    passwordFile = config.sops.secrets."passwords/root".path;
   };
   # My user
   users.users.nico = {
@@ -32,7 +42,7 @@
     home = "/home/nico";
     isNormalUser = true;
     openssh.authorizedKeys.keyFiles = [ keys.nico ];
-    passwordFile = "/var/persistent/secrets/pass/nico";
+    passwordFile = config.sops.secrets."passwords/nico".path;
     uid = 1000;
   };
 

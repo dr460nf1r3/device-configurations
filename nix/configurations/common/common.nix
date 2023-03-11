@@ -6,6 +6,7 @@
     ./locales.nix
     ./nix.nix
     ./shells.nix
+    ./sops.nix
     ./users.nix
     ../../overlays/default.nix
   ];

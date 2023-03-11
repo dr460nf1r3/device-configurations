@@ -8,6 +8,7 @@
       "cls" = "clear";
       "dd" = "dd progress=status";
       "dir" = "dir --color=auto";
+      "edit" = "nix-shell -p sops --run sops";
       "egrep" = "egrep --color=auto";
       "fastfetch" = "fastfetch -l nixos --load-config paleofetch";
       "fgrep" = "fgrep --color=auto";
@@ -39,6 +40,7 @@
       shellAbbrs = {
         "buildiso" = "nix-shell -p nixos-generators --run \'nixos-generate --format iso --configuration ./buildiso.nix -o result\'";
         "cls" = "clear";
+        "edit" = "nix-shell -p sops --run sops";
         "gcommit" = "git commit -m";
         "glcone" = "git clone";
         "gpr" = "git pull --rebase";

@@ -1,5 +1,8 @@
 { pkgs, config, ... }:
 {
+  # Use bleeding edge mesa - to do
+  # imports = /etc/nixos/pkgs/mesa.nix;
+
   # Automatically tune nice levels
   services.ananicy = {
     enable = true;

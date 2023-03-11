@@ -22,12 +22,10 @@
     enableScDaemon = true;
   };
 
-  # Login with Yubikey - once we have secrets management
-  # home.file = {
-  #   ".yubico/challenge-18063966" = {
-  #     mode = "600";
-  #     text = ''
-  #     '';
-  #   };
-  # };
+  # Login with Yubikey
+  sops.secrets."login/yubikey" = {
+    mode = "0600";
+    owner = config.users.users.nico.name;
+    path = "/home/nico/.yubico/challenge-18063966";
+  };
 }

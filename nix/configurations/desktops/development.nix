@@ -7,7 +7,6 @@
     gitkraken
     heroku
     hugo
-    jdk8
     jetbrains.pycharm-professional
     keybase-gui
     nixos-generators
@@ -51,7 +50,19 @@
   # services.kbfs.enable = true;
   # services.keybase.enable = true;
 
-  # Disable nixos-containers (conflicts with virtualisation.containers)
+  # Import secrets needed for development
+  sops.secrets."login/sops" = {
+    mode = "0600";
+    owner = config.users.users.nico.name;
+    path = "/home/nico/.config/sops/age/keys.txt";
+  };
+  sops.secrets."api_keys/heroku" = {
+    mode = "0600";
+    owner = config.users.users.nico.name;
+    path = "/home/nico/.netrc";
+  };
+
+  # Conflicts with virtualisation.containers if enabled
   boot.enableContainers = false;
 
   # Wireshark

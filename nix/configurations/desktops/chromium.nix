@@ -26,7 +26,6 @@
 
   # Basic Chromium settings using Ungoogled Chromium (user)
   home-manager.users.nico.programs.chromium = {
-    enable = true;
     commandLineArgs = [
       "--enable-accelerated-2d-canvas"
       "--enable-features=VaapiVideoDecoder"
@@ -36,6 +35,13 @@
       "--enable-zero-copy"
       "--ignore-gpu-blocklist"
       "--ozone-platform-hint=auto"
+    ];
+    enable = true;
+    extensions = [
+      {
+        id = "oladmjdebphlnjjcnomfhhbfdldiimaf";
+        updateUrl = "https://raw.githubusercontent.com/libredirect/libredirect/master/src/updates/updates.xml";
+      }
     ];
   };
 

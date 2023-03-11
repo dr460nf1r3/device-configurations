@@ -1,0 +1,9 @@
+keys:
+  - &lair age1xscsvq648tvjs5lgnp6s5htj6xdyf9mgpyrkytkjugz2vv53q5js9vcv0s
+  - &nico age15xfumpd676whgn29y69a8mx740p6gchpm58vf8f55p7g4lcwy30qxm3ezg
+creation_rules:
+  - path_regex: secrets/[^/]+\.yaml$
+    key_groups:
+      - age:
+          - *lair
+          - *nico

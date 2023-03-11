@@ -20,6 +20,7 @@ in
     directories = [
       "/etc/NetworkManager/system-connections"
       "/etc/nixos"
+      "/etc/secureboot"
       "/etc/ssh"
       "/var/cache/chaotic"
       "/var/lib/bluetooth"
@@ -33,7 +34,7 @@ in
       { directory = "/var/lib/iwd"; mode = "u=rwx,g=,o="; }
     ];
     files = [
-      "/etc/machine-id"
+      #"/etc/machine-id"
     ];
     users.root = {
       home = "/root";
@@ -61,6 +62,7 @@ in
         ".config/gsconnect"
         ".config/lutris"
         ".config/obs-studio"
+        ".config/sops/age"
         ".config/spotify-tui"
         ".config/teams-for-linux"
         ".gitkraken"
@@ -103,7 +105,6 @@ in
       ];
       files = [
         ".cache/keybasekeybase.app.serverConfig"
-        ".netrc"
       ];
     };
   };

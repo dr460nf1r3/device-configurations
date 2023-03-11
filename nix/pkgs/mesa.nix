@@ -21,11 +21,4 @@ in
   hardware.opengl.package = mesa-bleeding.drivers;
   hardware.opengl.package32 = lib32-mesa-bleeding.drivers;
   hardware.opengl.extraPackages = [ mesa-bleeding.opencl ];
-
-  # Creates a second boot entry without latest drivers
-  specialisation.stable-mesa.configuration = {
-    system.nixos.tags = [ "stable-mesa" ];
-    hardware.opengl.package = lib.mkForce pkgs.mesa.drivers;
-    hardware.opengl.package32 = lib.mkForce pkgs.pkgsi686Linux.mesa.drivers;
-  };
 }

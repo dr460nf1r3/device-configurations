@@ -143,14 +143,14 @@
         "unite@hardpixel.eu"
       ];
       favorite-apps = [
-        "org.gnome.Terminal.desktop"
+        "com.gexperts.Tilix.desktop" 
         "org.gnome.Nautilus.desktop"
         "chromium-browser.desktop"
         "org.telegram.desktop.desktop"
         "thunderbird.desktop"
         "com.spotify.Client.desktop"
         "gitkraken.desktop"
-        "code.desktop"
+        "code-url-handler.desktop"
       ];
     };
     "org/gnome/shell/extensions/dash-to-dock" = {

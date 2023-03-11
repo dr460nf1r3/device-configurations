@@ -4,10 +4,17 @@
   inputs = {
     # We roll unstable, as usual
     nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # Automated system themes - seems to be broken atm
+    # Automated system themes
     stylix.url = "github:danth/stylix";
-    # All of the VSCode extensions not available in Nixpkgs
-    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    # Smooth-criminal bleeding-edge Mesa3D
+    mesa-git-src = {
+      url = "github:chaotic-aur/mesa-mirror/main";
+      flake = false;
+    };
+    # Secure boot support
+    lanzaboote.url = "github:nix-community/lanzaboote";
+    # Secrets management
+    sops-nix.url = "github:Mic92/sops-nix";
     # In case I need to generate a build
     # nixos-generators = {
     #   url = "github:nix-community/nixos-generators";
@@ -45,7 +52,7 @@
     };
   };
 
-  outputs = { nixos-unstable, home-manager, stylix, impermanence, nur, ... }@attrs:
+  outputs = { nixos-unstable, home-manager, stylix, impermanence, nur, sops-nix, lanzaboote, ... }@attrs:
     let
       nixos = nixos-unstable;
       system = "x86_64-linux";
@@ -67,6 +74,7 @@
       });
       defaultModules = [
         #"${nixos}/nixos/modules/profiles/hardened.nix"
+        sops-nix.nixosModules.sops
         home-manager.nixosModules.home-manager
         nur.nixosModules.nur
         overlay-unstable
@@ -91,6 +99,7 @@
         modules = defaultModules ++ [
           ./hosts/slim-lair/slim-lair.nix
           impermanence.nixosModules.impermanence
+          lanzaboote.nixosModules.lanzaboote
         ];
         specialArgs = specialArgs;
       };
