@@ -92,6 +92,7 @@
         specialArgs = specialArgs;
       };
       # To-do 
+<<<<<<< Updated upstream
       nixosConfigurations."live-usb" = nixos.lib.nixosSystem {
         inherit system;
         modules = defaultModules ++ [
@@ -99,5 +100,14 @@
         ];
         specialArgs = specialArgs;
       };
+=======
+      # nixosConfigurations."live-cd" = nixos.lib.nixosSystem {
+      #   inherit system;
+      #   modules = defaultModules ++ [
+      #     ./hosts/live-cd/live-cd.nix
+      #   ];
+      #   specialArgs = specialArgs;
+      # };
+>>>>>>> Stashed changes
     };
 }

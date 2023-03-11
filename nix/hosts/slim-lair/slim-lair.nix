@@ -41,7 +41,7 @@
     system.nixos.tags = [ "lts" "zfs-stable" ];
   };
 
-  # Network configuration - id for ZFS
+  # Network configuration & id for ZFS
   networking.hostName = "slim-lair";
   networking.hostId = (builtins.substring 0 8 (builtins.readFile "/etc/machine-id"));
 

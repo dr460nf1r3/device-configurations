@@ -4,7 +4,11 @@
     bash.shellAliases = {
       # General useful things & theming
       "bat" = "bat --style header --style snip --style changes";
+<<<<<<< Updated upstream
       "buildiso" = "nix-shell -p nixos-generators --run \'nixos-generate --format iso --configuration ./buildiso.nix -o result\'";
+=======
+      "buildiso" = "nix-shell -p nixos-generators --run \'nixos-generate --format iso --configuration ./myimage.nix -o result\'";
+>>>>>>> Stashed changes
       "cls" = "clear";
       "dd" = "dd progress=status";
       "dir" = "dir --color=auto";

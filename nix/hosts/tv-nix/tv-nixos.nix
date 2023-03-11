@@ -27,9 +27,9 @@
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
   };
 
-  # Base configuration
+  # Hostname & hostid for ZFS
   networking.hostName = "tv-nixos";
-  networking.networkmanager.enable = true;
+  networking.hostId = (builtins.substring 0 8 (builtins.readFile "/etc/machine-id"));
 
   # Correct configurations to use on this device, taken from the hardware repo
   boot = {
@@ -53,13 +53,6 @@
 
   # SSD
   services.fstrim.enable = true;
-
-  # Enable the Xorg server
-  services.xserver.enable = true;
-
-  # Enable automatic login for the user
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "nico";
 
   # This is not supported
   services.hardware.bolt.enable = false;
