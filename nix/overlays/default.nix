@@ -25,8 +25,8 @@
         prismlauncher-mod =
           (prev.prismlauncher.overrideDerivation (oa: {
             patches = [
-              ../../overlays/offline-mode-prism-launcher.diff
-            ] ++ oa.cpatches;
+              ./offline-mode-prism-launcher.diff
+            ] ++ oa.patches;
           }));
       };
     in

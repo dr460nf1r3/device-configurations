@@ -20,7 +20,7 @@
       '';
       shellAliases = {
         # Shortcuts for SSH
-        "b" = "ssh -p 666 nico@65.108.140.36";
+        "b" = "ssh -p 666 nico@89.58.13.188";
         "c" = "ssh -p 420 nico@89.58.13.188";
         "e" = "ssh nico@89.58.13.188";
         "g1" = "ssh -p 222 nico@65.108.140.36";
