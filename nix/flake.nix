@@ -45,7 +45,7 @@
     };
   };
 
-  outputs = { nixos-unstable, home-manager, stylix, impermanence, ... }@attrs:
+  outputs = { nixos-unstable, home-manager, stylix, impermanence, nur, ... }@attrs:
     let
       nixos = nixos-unstable;
       system = "x86_64-linux";
@@ -62,11 +62,13 @@
           (final: prev: {
             unstable = nixos-unstable.legacyPackages.${prev.system};
           })
+          nur.overlay
         ];
       });
       defaultModules = [
-        "${nixos}/nixos/modules/profiles/hardened.nix"
+        #"${nixos}/nixos/modules/profiles/hardened.nix"
         home-manager.nixosModules.home-manager
+        nur.nixosModules.nur
         overlay-unstable
         stylix.nixosModules.stylix
       ];
@@ -76,10 +78,11 @@
       formatter.x86_64-linux = nixos-unstable.legacyPackages.x86_64-linux.nixpkgs-fmt;
 
       # All the systems
-      nixosConfigurations."nixos-tv" = nixos.lib.nixosSystem {
+      nixosConfigurations."tv-nixos" = nixos.lib.nixosSystem {
         inherit system;
         modules = defaultModules ++ [
-          ./hosts/nixos-tv/nixos-tv.nix
+          ./hosts/tv-nixos/tv-nixos.nix
+          impermanence.nixosModules.impermanence
         ];
         specialArgs = specialArgs;
       };
@@ -102,13 +105,11 @@
 
       # Host dependant home-manager configurations
       homeConfigurations = {
-        # Desktop
         "nico@slim-lair" = home-manager.lib.homeManagerConfiguration {
           modules = [ ./home/slim-lair.nix ];
         };
       };
       homeConfigurations = {
-        # Desktop
         "nico@tv-nixos" = home-manager.lib.homeManagerConfiguration {
           modules = [ ./home/tv-nixos.nix ];
         };

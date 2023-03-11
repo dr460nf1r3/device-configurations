@@ -68,12 +68,15 @@
     vnstat.enable = true;
   };
 
-  # Systemd-oomd - disabled by default
-  systemd.oomd.enable = lib.mkForce true;
-  systemd.oomd = {
-    enableUserServices = true;
-    extraConfig = { DefaultMemoryPressureDurationSec = "20s"; };
+  # Earlyoom for oom situations
+  services.earlyoom = {
+    enable = true;
+    enableNotifications = true;
+    freeMemThreshold = 5;
   };
+  
+  # Get notifications about earlyoom actions
+  services.systembus-notify.enable = true;
 
   # Environment
   environment = {

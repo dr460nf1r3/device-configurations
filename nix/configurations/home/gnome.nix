@@ -114,6 +114,15 @@
         "code.desktop"
       ];
     };
+    "org/gnome/shell/extensions/dash-to-dock" = {
+      autohide = true;
+      dock-fixed = false;
+      dock-position = "BOTTOM";
+      pressure-threshold = 200.0;
+      require-pressure-to-show = true;
+      show-favorites = true;
+      hot-keys = false;
+    };
     "org/gnome/shell/extensions/gsconnect" = {
       devices = [ "c9b46110e36de16a" ];
       enabled = true;

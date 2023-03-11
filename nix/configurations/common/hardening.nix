@@ -21,6 +21,21 @@
   # The hardening profile enables Apparmor by default, we don't want this to happen
   security.apparmor.enable = false;
 
+  # enable Firejail
+  programs.firejail.enable = true;
+
+  # Create system-wide executables firefox and chromium
+  programs.firejail.wrappedBinaries = {
+    firefox = {
+      executable = "${pkgs.lib.getBin pkgs.firefox}/bin/firefox";
+      profile = "${pkgs.firejail}/etc/firejail/firefox.profile";
+    };
+    chromium = {
+      executable = "${pkgs.lib.getBin pkgs.chromium}/bin/chromium";
+      profile = "${pkgs.firejail}/etc/firejail/chromium.profile";
+    };
+  };
+
   # Timeout TTY after 1 hour
   programs.bash.interactiveShellInit =
     "if [[ $(tty) =~ /dev\\/tty[1-6] ]]; then TMOUT=3600; fi";

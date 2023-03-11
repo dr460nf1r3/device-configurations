@@ -79,6 +79,7 @@ in
         ".local/share/nautilus"
         ".local/share/tor-browser"
         ".local/share/waydroid"
+        ".mozilla"
         ".thunderbird"
         ".var"
         "Documents"
@@ -86,7 +87,7 @@ in
         "Music"
         "Nextcloud"
         "Pictures"
-        "Sync"
+        "Sync" 
         "Videos"
         { directory = ".config/Bitwarden CLI"; mode = "0700"; }
         { directory = ".config/Keybase"; mode = "0700"; }

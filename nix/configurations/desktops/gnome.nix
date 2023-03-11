@@ -97,6 +97,9 @@ in
   services.gnome.gnome-online-accounts.enable = true;
   services.gnome.glib-networking.enable = true;
 
+  # Support Firefox if enabled
+  programs.firefox.nativeMessagingHosts.gsconnect = true;
+
   # GSConnect to connect my phone
   programs.kdeconnect = {
     enable = true;

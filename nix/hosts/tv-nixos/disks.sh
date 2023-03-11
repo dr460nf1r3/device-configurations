@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 set -o errexit
 
 # Create EFI
@@ -31,19 +31,22 @@ zfs create -o encryption=on -o keyformat=passphrase \
 # Mount & Permissions
 mount -t zfs zroot/ROOT/empty /mnt
 mkdir -p /mnt/nix /mnt/home/nico/Games \
-	/mnt/var/persistent /mnt/var/residues
+	/mnt/var/persistent /mnt/var/residues /mnt/boot
 mount -t zfs zroot/ROOT/nix /mnt/nix
 mount -t zfs zroot/games/home /mnt/home/nico/Games
 chown -R 1000:100 /mnt/home/nico
 chmod 0700 /mnt/home/nico
 mount -t zfs zroot/data/persistent /mnt/var/persistent
 mount -t zfs zroot/ROOT/residues /mnt/var/residues
+mount /dev/sda1 /mnt/boot
 
 # Podman
 zfs create -o mountpoint=none -o canmount=on zroot/containers
 
 # Passwords
 nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt' \
-	> /mnt/var/persistent/secrets/pass/{root,nico}
+	> /mnt/var/persistent/secrets/pass/nico
+nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt' \
+	> /mnt/var/persistent/secrets/pass/root
 
 echo "Finished."

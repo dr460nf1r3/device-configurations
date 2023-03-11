@@ -22,9 +22,6 @@
       enableUnstable = true;
       requestEncryptionCredentials = false;
     };
-    # /tmp on tmpfs
-    tmpOnTmpfs = true;
-    tmpOnTmpfsSize = "30%";
     # Needed to get the touchpad to work
     blacklistedKernelModules = [ "elan_i2c" ];
     # The new AMD Pstate driver & needed modules
@@ -70,9 +67,6 @@
 
   # Fix the monitor setup
   home-manager.users.nico.home.file.".config/monitors.xml".source = ./monitors.xml;
-
-  # Load invididual home configurations
-  # home-manager.users.nico = import ../home/tv-nixos.nix;
 
   # NixOS stuff
   system.stateVersion = "22.11";

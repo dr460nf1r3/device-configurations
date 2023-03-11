@@ -5,6 +5,7 @@
     ./chromium.nix
     ./connectivity.nix
     ./development.nix
+    ./firefox.nix
     ./fonts.nix
     ./games.nix
     ./gnome.nix
@@ -70,7 +71,7 @@
     obs-studio-wrapped
     tdesktop-userfonts
     teams-for-linux
-    thunderbird-bin
+    thunderbird
     spotify-tui
     prismlauncher-mod
     tor-browser-bundle-bin
@@ -106,7 +107,7 @@
           }); 
         prismlauncher-mod = pkgs.prismlauncher.overrideAttrs
           (oldAttrs: { 
-            patches = (oldAttrs.patches or [ ]) ++ [ ./offline-mode-prism-launcher.diff ];
+            patches = (oldAttrs.patches or [ ]) ++ [ ../../overlays/offline-mode-prism-launcher.diff ];
           }); 
       };
     in
