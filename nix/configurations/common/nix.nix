@@ -18,14 +18,25 @@
       # Allow using flakes
       auto-optimise-store = true;
       # github:nix-community/* cache
-      extra-substituters = [ "https://nix-community.cachix.org" ];
-      extra-trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
+      extra-substituters = [
+        "https://nix-community.cachix.org"
+        "https://garuda-linux.cachix.org"
+      ];
+      extra-trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "garuda-linux.cachix.org-1:tWw7YBE6qZae0L6BbyNrHo8G8L4sHu5QoDp0OXv70bg="
+      ];
       # This is a flake after all
       experimental-features = [ "nix-command" "flakes" ];
       max-jobs = "auto";
+      system-features = [ "kvm" "big-parallel" ];
       trusted-users = [ "root" "nico" ];
     };
     nixPath = [ "nixpkgs=${sources.nixpkgs}" ];
+    # Add each flake input as a registry
+    # To make nix3 commands consistent with the flake
+    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
+
   };
 
   # Allow unfree packages

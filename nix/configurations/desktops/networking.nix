@@ -13,6 +13,7 @@
   # Systemd-resolved using the local NextDNS
   services.resolved = {
     enable = true;
+    extraConfig = "MulticastDNS=true";
     fallbackDns = [ "127.0.0.1" ];
   };
 
@@ -31,7 +32,7 @@
 
   # Zerotier hosts for easy access
   networking.hosts = {
-    "10.241.1.1" = [ "tv-nixos" ];
-    "10.241.1.2" = [ "slim-lair" ];
+    "10.241.1.1" = [ "slim-lair" ];
+    "10.241.1.2" = [ "tv-nixos" ];
   };
 }

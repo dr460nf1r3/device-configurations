@@ -64,9 +64,6 @@
     home.file.".config/monitors.xml".source = ./monitors.xml;
   };
 
-  # Load invididual home configurations
-  home-manager.users.nico = import ../home/tv-nixos.nix;
-
   # I can't be bothered to upgrade this manually
   system.autoUpgrade.enable = true;
 
