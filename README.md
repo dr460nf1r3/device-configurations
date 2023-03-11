@@ -4,7 +4,7 @@
 
 This repo contains my NixOS dotfiles. All of my personal devices are going to be added here over time.
 
-![desktop](https://imgur.com/a/7NtMKaA)
+![desktop](https://i.imgur.com/XdwFOrP.png)
 
 **What is inside?**:
 
