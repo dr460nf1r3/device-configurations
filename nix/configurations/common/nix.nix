@@ -1,4 +1,4 @@
-{ pkgs, config, sources, ... }:
+{ pkgs, config, sources, lib, ... }:
 {
   # General nix settings
   nix = {
@@ -33,10 +33,6 @@
       trusted-users = [ "root" "nico" ];
     };
     nixPath = [ "nixpkgs=${sources.nixpkgs}" ];
-    # Add each flake input as a registry
-    # To make nix3 commands consistent with the flake
-    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
-
   };
 
   # Allow unfree packages

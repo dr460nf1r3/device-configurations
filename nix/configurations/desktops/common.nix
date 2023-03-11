@@ -70,7 +70,6 @@
     neofetch
     obs-studio-wrapped
     tdesktop-userfonts
-    teams-for-linux
     thunderbird
     spotify-tui
     prismlauncher-mod
@@ -82,36 +81,6 @@
     yubikey-personalization
     yubioath-flutter
   ];
-
-  # Override obs-studio with plugins
-  nixpkgs.overlays =
-    let
-      thisConfigsOverlay = final: prev: {
-        # Obs with plugins
-        obs-studio-wrapped =
-          final.wrapOBS.override { inherit (final) obs-studio; } {
-            plugins = with final.obs-studio-plugins; [
-              obs-gstreamer
-              obs-pipewire-audio-capture
-              obs-vaapi
-              obs-vkcapture
-            ];
-          };
-        tdesktop-userfonts = pkgs.tdesktop.overrideAttrs
-          (oldAttrs: {
-            cmakeFlags = [
-              "-DDESKTOP_APP_QT6=OFF"
-              "-DDESKTOP_APP_USE_PACKAGED_FONTS=OFF"
-              "-DTDESKTOP_API_TEST=ON"
-            ];
-          }); 
-        prismlauncher-mod = pkgs.prismlauncher.overrideAttrs
-          (oldAttrs: { 
-            patches = (oldAttrs.patches or [ ]) ++ [ ../../overlays/offline-mode-prism-launcher.diff ];
-          }); 
-      };
-    in
-    [ thisConfigsOverlay ];
 
   # Spotify via spotify-tui & spotifyd
   services.spotifyd = {

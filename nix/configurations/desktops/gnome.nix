@@ -27,7 +27,21 @@ in
   };
 
   # Enable Wayland for a lot of apps
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables = {
+    BEMENU_BACKEND = "wayland";
+    CLUTTER_BACKEND = "wayland";
+    ECORE_EVAS_ENGINE = "wayland_egl";
+    ELM_ENGINE = "wayland_egl";
+    GDK_BACKEND = "wayland";
+    MOZ_ENABLE_WAYLAND = "1";
+    NIXOS_OZONE_WL = "1";
+    QT_AUTO_SCREEN_SCALE_FACTOR = "0";
+    QT_QPA_PLATFORM = "wayland-egl";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+    SAL_USE_VCLPLUGIN = "gtk3";
+    SDL_VIDEODRIVER = "wayland";
+    _JAVA_AWT_WM_NONREPARENTING = "1";
+  };
 
   # Needed fix for autologin
   systemd.services = {
@@ -66,7 +80,7 @@ in
   ]) ++ (with pkgs.gnome; [
     atomix
     cheese
-    epiphany 
+    epiphany
     evince
     geary
     gedit
@@ -82,6 +96,7 @@ in
 
   # Additional GNOME packages not included by default
   environment.systemPackages = with pkgs; [
+    dconf2nix
     gnome.gnome-boxes
     gnome.gnome-tweaks
     gnomeExtensions.expandable-notifications

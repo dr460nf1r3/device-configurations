@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }: 
+{ pkgs, lib, config, ... }:
 {
   imports = [
     ./boot.nix
@@ -74,7 +74,7 @@
     enableNotifications = true;
     freeMemThreshold = 5;
   };
-  
+
   # Get notifications about earlyoom actions
   services.systembus-notify.enable = true;
 
@@ -88,7 +88,6 @@
       cached-nix-shell
       cachix
       curl
-      dconf2nix
       direnv
       duf
       exa
@@ -97,6 +96,7 @@
       micro
       nettools
       nmap
+      nur.repos.federicoschonborn.fastfetch
       python3
       tldr
       traceroute

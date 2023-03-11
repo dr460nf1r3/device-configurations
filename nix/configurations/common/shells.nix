@@ -9,6 +9,7 @@
       "dd" = "dd progress=status";
       "dir" = "dir --color=auto";
       "egrep" = "egrep --color=auto";
+      "fastfetch" = "fastfetch -l nixos --load-config paleofetch";
       "fgrep" = "fgrep --color=auto";
       "gcommit" = "git commit -m";
       "gitlog" = "git log --oneline --graph --decorate --all";
@@ -55,6 +56,7 @@
         "dd" = "dd progress=status";
         "dir" = "dir --color=auto";
         "egrep" = "egrep --color=auto";
+        "fastfetch" = "fastfetch -l nixos --load-config paleofetch";
         "fgrep" = "fgrep --color=auto";
         "gitlog" = "git log --oneline --graph --decorate --all";
         "ip" = "ip --color=auto";
@@ -68,6 +70,7 @@
       };
       shellInit = ''
         set fish_greeting
+        fastfetch -l nixos --load-config paleofetch
       '';
     };
   };

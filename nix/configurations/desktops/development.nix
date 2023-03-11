@@ -12,6 +12,9 @@
     keybase-gui
     nixos-generators
     nixpkgs-fmt
+  	nur.repos.yes.archlinux.paru
+    nur.repos.yes.archlinux.asp
+    nur.repos.yes.archlinux.devtools
     shellcheck
     shfmt
     teamviewer
