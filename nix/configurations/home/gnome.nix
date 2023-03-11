@@ -2,8 +2,47 @@
 {
   # Enable dconf
   dconf.enable = true;
-  # In case we use GNOME
+  # Configure everything in dconf
   dconf.settings = {
+    "com/gexperts/Tilix" = {
+      always-use-regex-in-search = true;
+      auto-hide-mouse = true;
+      control-scroll-zoom = true;
+      copy-on-select = true;
+      enable-wide-handle = false;
+      middle-click-close = true;
+      paste-advanced-default = true;
+      tab-position = "bottom";
+      terminal-title-show-when-single = false;
+      terminal-title-style = "normal";
+      window-save-state = false;
+      window-style = "normal";
+    };
+    "com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d" = {
+      background-color = "#1E1E1E";
+      background-transparency-percent = 10;
+      badge-color = "#AC7EA8";
+      badge-color-set = false;
+      badge-use-system-font = true;
+      bold-color-set = true;
+      cursor-blink-mode = "on";
+      cursor-colors-set = false;
+      cursor-shape = "ibeam";
+      custom-command = "${pkgs.fish}/bin/fish";
+      default-size-columns = 120;
+      default-size-rows = 30;
+      dim-transparency-percent = 0;
+      font = "JetBrainsMono Nerd Font Mono 12";
+      foreground-color = "#A7A7A7";
+      highlight-colors-set = false;
+      notify-silence-enabled = true;
+      notify-silence-threshold = 60;
+      terminal-bell = "icon-sound";
+      use-custom-command = true;
+      use-system-font = false;
+      use-theme-colors = true;
+      visible-name = "Nico";
+    };
     "com/github/wwmm/pulseeffects" = {
       use-dark-theme = true;
     };

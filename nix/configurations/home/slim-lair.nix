@@ -54,5 +54,8 @@
         {"Power":{"iconName":"org.gnome.Settings-power-symbolic","enabled":true},"Lutris":{"iconName":"lutris","enabled":true},"Software":{"iconName":"org.gnome.Software","enabled":true},"Clocks":{"iconName":"org.gnome.clocks","enabled":true},"Color":{"iconName":"org.gnome.Settings-color-symbolic","enabled":true},"Archive Manager":{"iconName":"org.gnome.FileRoller","enabled":true},"PulseEffects":{"iconName":"pulseeffects","enabled":true},"Printers":{"iconName":"org.gnome.Settings-printers-symbolic","enabled":true},"Telegram Desktop":{"iconName":"telegram","enabled":true},"Files":{"iconName":"org.gnome.Nautilus","enabled":true},"Disk Usage Analyzer":{"iconName":"org.gnome.baobab","enabled":true},"Disks":{"iconName":"org.gnome.DiskUtility","enabled":true},"Evolution Alarm Notify":{"iconName":"appointment-soon","enabled":true},"Date & Time":{"iconName":"org.gnome.Settings-time-symbolic","enabled":true}}
       '';
     };
+    "org/gnome/shell/extensions/gsconnect/device/c9b46110e36de16a/plugin/runcommand" = {
+      command-list = "{'86550fa8-da62-4a0a-b9d2-e4229821be8a': <{'name': 'Lock screen', 'command': 'systemctl lock'}>, '1961e22c-d0a4-4784-a14c-cf5409ae0ec7': <{'name': 'Unlock screen', 'command': 'loginctl unlock-session 1'}>, '8f508b73-be83-444f-bfb6-c408636d48e4': <{'name': 'Shutdown', 'command': 'systemctl poweroff'}>}";
+    };
   }
 }

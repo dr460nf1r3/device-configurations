@@ -78,6 +78,7 @@
         SkipOnboarding = true;
       };
     };
+    nativeMessagingHosts.gsconnect = true;
   };
 
   # Enable Wayland

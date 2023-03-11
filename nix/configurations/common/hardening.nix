@@ -21,7 +21,7 @@
   # The hardening profile enables Apparmor by default, we don't want this to happen
   security.apparmor.enable = false;
 
-  # enable Firejail
+  # Enable Firejail - currently disabled
   programs.firejail.enable = true;
 
   # Create system-wide executables firefox and chromium

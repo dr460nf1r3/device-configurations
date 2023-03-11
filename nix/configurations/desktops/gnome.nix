@@ -6,8 +6,22 @@ let
     rev = "cf6bc89";
     sha256 = "U9pfie3qABp5sTr3M9ga/jX8C807FeiXlmEZnC4ZM58=";
   };
+
   monitorsXmlContent = builtins.readFile ../../hosts/slim-lair/monitors.xml;
   monitorsConfig = pkgs.writeText "gdm_monitors.xml" monitorsXmlContent;
+
+  nixos-conf-editor = (import (pkgs.fetchFromGitHub {
+    owner = "vlinkz";
+    repo = "nixos-conf-editor";
+    rev = "0.1.1";
+    sha256 = "sha256-TeDpfaIRoDg01FIP8JZIS7RsGok/Z24Y3Kf+PuKt6K4=";
+  })) { };
+  nix-software-center = (import (pkgs.fetchFromGitHub {
+    owner = "vlinkz";
+    repo = "nix-software-center";
+    rev = "0.1.1";
+    sha256 = "0frigabszyfkphfbsniaa1d546zm8a2gx0cqvk2fr2qfa71kd41n";
+  })) { };
 in
 {
   # Enable GNOME desktop environment with autologin
@@ -77,6 +91,7 @@ in
     gnome-console
     gnome-photos
     gnome-tour
+    xterm
   ]) ++ (with pkgs.gnome; [
     atomix
     cheese
@@ -103,8 +118,11 @@ in
     gnomeExtensions.gsconnect
     gnomeExtensions.pano
     gnomeExtensions.unite
+    nixos-conf-editor
+    nix-software-center
+    tilix
   ];
-  services.dbus.packages = [ pkgs.dconf ];
+  services.dbus.packages = [ pkgs.dconf pkgs.gnomeExtensions.pano ];
   services.geoclue2.enable = true;
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 
@@ -120,10 +138,6 @@ in
     enable = true;
     package = pkgs.gnomeExtensions.gsconnect;
   };
-
-  # The new GNOME console sucks
-  programs.gnome-terminal.enable = true;
-  programs.gnome-documents.enable = true;
 
   # Enable the GNOME keyring
   services.gnome.gnome-keyring.enable = true;
