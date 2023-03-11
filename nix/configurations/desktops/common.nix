@@ -68,10 +68,11 @@
     lm_sensors
     neofetch
     obs-studio-wrapped
-    tdesktop
+    tdesktop-userfonts
     teams-for-linux
     thunderbird-bin
     spotify-tui
+    prismlauncher-mod
     tor-browser-bundle-bin
     ugrep
     usbutils
@@ -95,6 +96,18 @@
               obs-vkcapture
             ];
           };
+        tdesktop-userfonts = pkgs.tdesktop.overrideAttrs
+          (oldAttrs: {
+            cmakeFlags = [
+              "-DDESKTOP_APP_QT6=OFF"
+              "-DDESKTOP_APP_USE_PACKAGED_FONTS=OFF"
+              "-DTDESKTOP_API_TEST=ON"
+            ];
+          }); 
+        prismlauncher-mod = pkgs.prismlauncher.overrideAttrs
+          (oldAttrs: { 
+            patches = (oldAttrs.patches or [ ]) ++ [ ./offline-mode-prism-launcher.diff ];
+          }); 
       };
     in
     [ thisConfigsOverlay ];

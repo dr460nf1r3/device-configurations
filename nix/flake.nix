@@ -99,5 +99,19 @@
         ];
         specialArgs = specialArgs;
       };
+
+      # Host dependant home-manager configurations
+      homeConfigurations = {
+        # Desktop
+        "nico@slim-lair" = home-manager.lib.homeManagerConfiguration {
+          modules = [ ./home/slim-lair.nix ];
+        };
+      };
+      homeConfigurations = {
+        # Desktop
+        "nico@tv-nixos" = home-manager.lib.homeManagerConfiguration {
+          modules = [ ./home/tv-nixos.nix ];
+        };
+      };
     };
 }

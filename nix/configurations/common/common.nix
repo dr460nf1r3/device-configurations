@@ -68,9 +68,9 @@
     vnstat.enable = true;
   };
 
-  # Systemd-oomd daemon
+  # Systemd-oomd - disabled by default
+  systemd.oomd.enable = lib.mkForce true;
   systemd.oomd = {
-    enable = true;
     enableUserServices = true;
     extraConfig = { DefaultMemoryPressureDurationSec = "20s"; };
   };

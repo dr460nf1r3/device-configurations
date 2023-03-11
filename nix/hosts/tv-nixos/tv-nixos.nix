@@ -23,7 +23,7 @@
       requestEncryptionCredentials = false;
     };
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
-    kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    #kernelPackages = pkgs.linuxPackages_xanmod_latest;
   };
 
   # Hostname & hostid for ZFS
@@ -63,6 +63,9 @@
   home-manager.users.nico = { lib, ... }: {
     home.file.".config/monitors.xml".source = ./monitors.xml;
   };
+
+  # Load invididual home configurations
+  home-manager.users.nico = import ../home/tv-nixos.nix;
 
   # I can't be bothered to upgrade this manually
   system.autoUpgrade.enable = true;

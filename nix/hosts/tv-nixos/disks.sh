@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -o errexit
 
 # Create EFI
@@ -41,5 +41,9 @@ mount -t zfs zroot/ROOT/residues /mnt/var/residues
 
 # Podman
 zfs create -o mountpoint=none -o canmount=on zroot/containers
+
+# Passwords
+nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt' \
+	> /mnt/var/persistent/secrets/pass/{root,nico}
 
 echo "Finished."

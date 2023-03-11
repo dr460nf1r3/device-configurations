@@ -2,6 +2,7 @@
 # let
 #   spicePkgs = spicetify-nix.packages.${pkgs.system}.default;
 # in
+
 {
   # Import individual configuration snippets
   imports = [

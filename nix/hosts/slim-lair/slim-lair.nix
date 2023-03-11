@@ -30,7 +30,7 @@
     # The new AMD Pstate driver & needed modules
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
     kernelModules = [ "acpi_call" "amdgpu" "amd-pstate=passive" ];
-    kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    #kernelPackages = pkgs.linuxPackages_xanmod_latest;
     kernelParams = [ "initcall_blacklist=acpi_cpufreq_init" ];
   };
 
@@ -69,9 +69,10 @@
   environment.systemPackages = with pkgs; [ libinput ];
 
   # Fix the monitor setup
-  home-manager.users.nico = { lib, ... }: {
-    home.file.".config/monitors.xml".source = ./monitors.xml;
-  };
+  home-manager.users.nico.home.file.".config/monitors.xml".source = ./monitors.xml;
+
+  # Load invididual home configurations
+  # home-manager.users.nico = import ../home/tv-nixos.nix;
 
   # NixOS stuff
   system.stateVersion = "22.11";
