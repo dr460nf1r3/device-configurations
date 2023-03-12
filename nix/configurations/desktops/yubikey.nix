@@ -14,7 +14,7 @@
   sops.secrets."misc/yubikey" = {
     mode = "0600";
     owner = config.users.users.nico.name;
-    path = "/home/nico/.yubico/challenge";
+    path = "/home/nico/.yubico/challenge-18063966";
   };
 
   # Yubikey personalization & Yubico Authenticator

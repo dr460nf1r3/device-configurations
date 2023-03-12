@@ -2,7 +2,9 @@
 {
   # This is the default sops file that will be used for all secrets
   sops.defaultSopsFile = ../../secrets/global.yaml;
-
-  # This will automatically import SSH keys as age keys
-  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  
+  # https://github.com/Mic92/sops-nix/issues/149
+  # Supply the keys /etc/ssh/ssh_host_{rsa,ed25519}_key to sops
+  # via ZFS snapshot zroot/ROOT/empty@keys and rollback to this snapshot
+  sops.age.keyFile = "/var/persistent/secrets/keys.txt";
 }
