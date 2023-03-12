@@ -14,4 +14,7 @@
     enable = true;
     memoryPercent = 90;
   };
+
+  # Tune the Zen kernel
+  programs.cfs-zen-tweaks.enable = true;
 }

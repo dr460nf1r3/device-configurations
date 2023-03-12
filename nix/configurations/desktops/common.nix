@@ -10,6 +10,7 @@
     ./games.nix
     ./gnome.nix
     ./impermanence.nix
+    ./misc.nix
     ./networking.nix
     ./performance.nix
     ./school.nix

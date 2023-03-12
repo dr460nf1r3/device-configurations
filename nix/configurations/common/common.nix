@@ -83,6 +83,7 @@
   environment = {
     # Packages I always need
     systemPackages = with pkgs; [
+      age
       bind
       bitwarden-cli
       btop
@@ -99,6 +100,7 @@
       nmap
       nur.repos.federicoschonborn.fastfetch
       python3
+      sops
       tldr
       traceroute
       ugrep

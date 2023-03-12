@@ -1,5 +1,5 @@
 # ZFS-based impermanence but instead of rolling back on every start, roll back on safe shutdown/halt/reboot
-{ config, lib, pkgs, ... }: 
+{ config, lib, pkgs, ... }:
 let
   cfgZfs = config.boot.zfs;
 in
@@ -76,7 +76,6 @@ in
         ".local/share/evolution"
         ".local/share/fish"
         ".local/share/gnome-photos"
-        ".local/share/gnome-remote-desktop"
         ".local/share/gvfs-metadata"
         ".local/share/heroku"
         ".local/share/lutris"
@@ -92,16 +91,14 @@ in
         "Music"
         "Nextcloud"
         "Pictures"
-        "Sync" 
+        "Sync"
         "Videos"
         { directory = ".config/Bitwarden CLI"; mode = "0700"; }
         { directory = ".config/Keybase"; mode = "0700"; }
         { directory = ".gnupg"; mode = "0700"; }
         { directory = ".local/share/keybase"; mode = "0700"; }
         { directory = ".local/share/keyrings"; mode = "0700"; }
-        { directory = ".secrets"; mode = "0700"; }
         { directory = ".ssh"; mode = "0700"; }
-        { directory = ".yubico"; mode = "0700"; }
       ];
       files = [
         ".cache/keybasekeybase.app.serverConfig"

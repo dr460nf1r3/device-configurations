@@ -9,7 +9,6 @@
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         bypass-paywalls-clean
         darkreader
-        enhanced-github
         flagfox
         grammarly
         gsconnect
@@ -19,7 +18,10 @@
         tabliss
         ublock-origin
       ];
-      extraConfig = builtins.readFile "/etc/nixos/assets/firefox.cfg";
+      extraConfig = builtins.fetchurl {
+        url = "https://raw.githubusercontent.com/dr460nf1r3/firedragon-browser/master/firedragon.cfg";
+        sha256 = "sha256:0s81cabb4d3cvbqk4cymq5bcxx816dsdfx10lmb4wywd1m2vx1wd";
+      };
       isDefault = true;
       search.engines = {
         "Nix Packages" = {

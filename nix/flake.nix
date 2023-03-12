@@ -73,11 +73,10 @@
         ];
       });
       defaultModules = [
-        #"${nixos}/nixos/modules/profiles/hardened.nix"
-        sops-nix.nixosModules.sops
         home-manager.nixosModules.home-manager
         nur.nixosModules.nur
         overlay-unstable
+        sops-nix.nixosModules.sops
         stylix.nixosModules.stylix
       ];
     in

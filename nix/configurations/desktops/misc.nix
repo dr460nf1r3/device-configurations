@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ config, ... }:
 {
   # Spotify via spotify-tui & spotifyd
   services.spotifyd = {
@@ -17,7 +17,7 @@
       max_cache_size = 1000000000;
       mixer = "PCM";
       normalisation_pregain = -10;
-      password_cmd = "cat /var/persistent/pass/spot";
+   #  password_file = config.sops.secrets."apps/spotifyd";
       use_mpris = true;
       username = "spotify@dr460nf1r3.org";
       volume_controller = "alsa";
@@ -27,5 +27,5 @@
   };
 
   # Waydroid for Android apps
-  virtualisation.waydroid.enable = true;
+  # virtualisation.waydroid.enable = true;
 }

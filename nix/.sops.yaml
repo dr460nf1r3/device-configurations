@@ -1,6 +1,6 @@
 keys:
-  - &lair age1xscsvq648tvjs5lgnp6s5htj6xdyf9mgpyrkytkjugz2vv53q5js9vcv0s
-  - &nico age15xfumpd676whgn29y69a8mx740p6gchpm58vf8f55p7g4lcwy30qxm3ezg
+  - &lair age1amrvulahe6tayc9d054pvfyk0wr4psekjj05p27fdav7m6x34fzsqd6e5l
+  - &nico age1vc3r79rf5mtx7wla0u394lr3nqveqf6edjwe0fmf0s7umncyqaaqjl9w78
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
     key_groups:

@@ -51,7 +51,7 @@
   # services.keybase.enable = true;
 
   # Import secrets needed for development
-  sops.secrets."login/sops" = {
+  sops.secrets."api_keys/sops" = {
     mode = "0600";
     owner = config.users.users.nico.name;
     path = "/home/nico/.config/sops/age/keys.txt";

@@ -65,7 +65,7 @@ in
 
   # Style the operating system using Stylix
   stylix.base16Scheme = "${base16-schemes}/gruvbox-dark-hard.yaml";
-  stylix.image = pkgs.fetchurl {
+  stylix.image = builtins.fetchurl {
     url = "https://gruvbox-wallpapers.onrender.com/wallpapers/anime/wall.jpg";
     sha256 = "sha256-Dt5A3cA5M+g82RiZn1cbD7CVzAz/b8c1nTEpkp273/s=";
   };

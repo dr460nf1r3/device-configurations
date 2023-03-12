@@ -29,7 +29,7 @@
     neededForBoot = true;
   };
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/7044-F478";
+    device = "/dev/disk/by-uuid/0012-B6FF";
     fsType = "vfat";
   };
 

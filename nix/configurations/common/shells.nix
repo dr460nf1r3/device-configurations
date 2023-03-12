@@ -1,4 +1,11 @@
-{ ... }: {
+{ pkgs, ... }: 
+{
+  # Use micro as editor
+  environment.sessionVariables = {
+    EDITOR = "${pkgs.micro}/bin/micro";
+    VISUAL = "${pkgs.micro}/bin/micro";
+  };
+
   # Programs & global config
   programs = {
     bash.shellAliases = {
