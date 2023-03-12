@@ -150,7 +150,7 @@
         "thunderbird.desktop"
         "com.spotify.Client.desktop"
         "gitkraken.desktop"
-        "code-url-handler.desktop"
+        "code.desktop"
       ];
     };
     "org/gnome/shell/extensions/dash-to-dock" = {

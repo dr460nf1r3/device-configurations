@@ -43,10 +43,4 @@ mount /dev/nvme0n1p1 /mnt/boot
 # Podman
 zfs create -o mountpoint=none -o canmount=on zroot/containers
 
-# Passwords
-nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt' \
-	> /mnt/var/persistent/secrets/pass/nico
-nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt' \
-	> /mnt/var/persistent/secrets/pass/root
-
 echo "Finished."

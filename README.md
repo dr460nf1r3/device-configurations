@@ -4,14 +4,17 @@
 
 This repo contains my NixOS dotfiles. All of my personal devices are going to be added here over time.
 
-![desktop](https://i.imgur.com/XdwFOrP.png)
+![desktop](https://i.imgur.com/Ghbgwht.png)
+![vscode](https://i.imgur.com/zY7Q3q0.png)
+![browser](https://i.imgur.com/DlEVFxs.png)
 
 **What is inside?**:
 
-- Multiple **NixOS configurations**, including **desktop**, **laptop**, **server**
+- Multiple **NixOS configurations**, including **desktop** & **server**
 - **Opt-in persistence** through impermanence + ZFS snapshots
 - **Mesh networked** hosts with **zerotier**
-- Fully themed & configured operating system using **Stylix** & the GNOME desktop
+- Fully Gruvbox themed & configured operating system using **Stylix** & the **GNOME desktop**
+- Secrets are managed via **nix-sops**
 
 ## Structure
 
