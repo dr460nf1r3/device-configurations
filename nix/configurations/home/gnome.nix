@@ -248,4 +248,10 @@
 
   # Enhance audio output
   services.pulseeffects.enable = true;
+
+  # Actually enable the gnome-keyring for ssh keys
+  services.gnome-keyring = {
+    enable = true;
+    components = [ "secrets" "ssh" ];
+  };
 }

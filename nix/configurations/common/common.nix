@@ -7,6 +7,7 @@
     ./nix.nix
     ./shells.nix
     ./sops.nix
+    ./theming.nix
     ./users.nix
     ../../overlays/default.nix
   ];

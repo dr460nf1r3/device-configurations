@@ -1,11 +1,11 @@
 { pkgs, home-manager, ... }:
 {
   # Basic Firefox settings (user)
-  home-manager.users.nico.programs.firefox = {
+  home-manager.users."nico".programs.firefox = {
     enable = true;
     profiles.default = {
       id = 0;
-      name = "Default";
+      name = "Nico";
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         bypass-paywalls-clean
         darkreader
@@ -81,6 +81,24 @@
       };
     };
     nativeMessagingHosts.gsconnect = true;
+  };
+
+  # Thunderbird configuration
+  home-manager.users."nico".programs.thunderbird = {
+    enable = true;
+    profiles."nico" = {
+      isDefault = true;
+      settings = {
+        "datareporting.healthreport.uploadEnabled" = false;
+        "font.name.sans-serif.x-western" = "Fira Sans";
+        "mail.incorporate.return_receipt" = 1;
+        "mail.markAsReadOnSpam" = true;
+        "mail.spam.logging.enabled" = true;
+        "mail.spam.manualMark" = true;
+        "offline.download.download_messages" = 1;
+        "offline.send.unsent_messages" = 1;
+      };
+    };
   };
 
   # Enable Wayland

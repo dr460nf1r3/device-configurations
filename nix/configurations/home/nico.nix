@@ -6,12 +6,7 @@
 {
   # Import individual configuration snippets
   imports = [
-    ./default-apps.nix
-    ./gnome.nix
-    ./misc.nix
     ./shells.nix
-    ./theming.nix
-    # spicetify-nix.homeManagerModule
   ];
 
   # Always needed home-manager settings - don't touch!

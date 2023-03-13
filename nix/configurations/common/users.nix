@@ -59,7 +59,7 @@ in
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.nico = import ../home/nico.nix;
+    users."nico" = import ../home/nico.nix;
   };
 
   # Increase open file limit for sudoers

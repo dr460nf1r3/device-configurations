@@ -5,18 +5,21 @@
     ./chromium.nix
     ./connectivity.nix
     ./development.nix
-    ./firefox.nix
     ./fonts.nix
     ./games.nix
     ./gnome.nix
     ./impermanence.nix
     ./misc.nix
+    ./mozilla.nix
     ./networking.nix
     ./performance.nix
     ./school.nix
     ./sound.nix
     ./yubikey.nix
   ];
+
+  # Load desktop specific configurations
+  home-manager.users."nico".imports = [ ../home/desktops.nix ];
 
   # Power profiles daemon
   services.power-profiles-daemon.enable = true;
@@ -66,6 +69,7 @@
     hunspellDicts.de_DE
     hunspellDicts.en_US
     inkscape
+    libsecret
     libva-utils
     lm_sensors
     obs-studio-wrapped

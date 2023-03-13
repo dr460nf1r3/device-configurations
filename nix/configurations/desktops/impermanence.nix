@@ -86,6 +86,7 @@ in
         ".mozilla"
         ".thunderbird"
         ".var"
+        ".yubico"
         "Documents"
         "Downloads"
         "Music"

@@ -1,12 +1,5 @@
 { pkgs, lib, config, sources, ... }:
 let
-  base16-schemes = pkgs.fetchFromGitHub {
-    owner = "tinted-theming";
-    repo = "base16-schemes";
-    rev = "cf6bc89";
-    sha256 = "U9pfie3qABp5sTr3M9ga/jX8C807FeiXlmEZnC4ZM58=";
-  };
-
   monitorsXmlContent = builtins.readFile ../../hosts/slim-lair/monitors.xml;
   monitorsConfig = pkgs.writeText "gdm_monitors.xml" monitorsXmlContent;
 
@@ -61,29 +54,6 @@ in
   systemd.services = {
     "autovt@tty1".enable = false;
     "getty@tty1".enable = false;
-  };
-
-  # Style the operating system using Stylix
-  stylix.base16Scheme = "${base16-schemes}/gruvbox-dark-hard.yaml";
-  stylix.image = builtins.fetchurl {
-    url = "https://gruvbox-wallpapers.onrender.com/wallpapers/anime/wall.jpg";
-    sha256 = "sha256-Dt5A3cA5M+g82RiZn1cbD7CVzAz/b8c1nTEpkp273/s=";
-  };
-  stylix.polarity = "dark";
-  stylix.fonts = {
-    serif = config.stylix.fonts.sansSerif;
-    sansSerif = {
-      package = pkgs.fira;
-      name = "Fira Sans";
-    };
-    monospace = {
-      package = pkgs.jetbrains-mono;
-      name = "Jetbrains Mono Nerd Font";
-    };
-    emoji = {
-      package = pkgs.noto-fonts-emoji;
-      name = "Noto Color Emoji";
-    };
   };
 
   # Remove a few applications that I don't like
@@ -148,4 +118,23 @@ in
   systemd.tmpfiles.rules = [
     "L+ /run/gdm/.config/monitors.xml - - - - ${monitorsConfig}"
   ];
+
+  # MPV configuration
+  home-manager.users."nico".programs.mpv = {
+    enable = true;
+    config = {
+      # Temporary & lossless screenshots
+      screenshot-format = "png";
+      screenshot-directory = "/tmp";
+      # for Pipewire (Let's pray for MPV native solution)
+      ao = "openal";
+      audio-channels = "stereo";
+      # GPU & Wayland
+      hwdec = "vaapi";
+      vo = "gpu";
+      gpu-api = "vulkan";
+      # YouTube quality
+      ytdl-format = "bestvideo[height<=?2160]+bestaudio/best";
+    };
+  };
 }
