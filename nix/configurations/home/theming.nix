@@ -23,7 +23,4 @@
     size = 32;
     gtk.enable = true;
   };
-
-  # Enable dircolors
-  programs.dircolors.enable = true;
 }

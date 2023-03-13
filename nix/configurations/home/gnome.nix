@@ -247,7 +247,10 @@
   };
 
   # Enhance audio output
-  services.pulseeffects.enable = true;
+  services.easyeffects.enable = true;
+
+  # Enable the numlock on startup
+  xsession.numlock.enable = true;
 
   # Actually enable the gnome-keyring for ssh keys
   services.gnome-keyring = {
