@@ -84,7 +84,8 @@
       # Defines a formatter for "nix fmt"
       formatter.x86_64-linux = nixos-unstable.legacyPackages.x86_64-linux.nixpkgs-fmt;
 
-      # All the systems
+      # All the system configurations
+      # My old laptop serving as TV
       nixosConfigurations."tv-nixos" = nixos.lib.nixosSystem {
         inherit system;
         modules = defaultModules ++ [
@@ -93,6 +94,7 @@
         ];
         specialArgs = specialArgs;
       };
+      # My main device (Lenovo Slim 7)
       nixosConfigurations."slim-lair" = nixos.lib.nixosSystem {
         inherit system;
         modules = defaultModules ++ [
@@ -102,7 +104,15 @@
         ];
         specialArgs = specialArgs;
       };
-      # To-do 
+      # For WSL, mostly used at work only
+      nixosConfigurations."wsl-nixos" = nixos.lib.nixosSystem {
+        inherit system;
+        modules = defaultModules ++ [
+          ./hosts/wsl-nixos/wsl-nixos.nix
+        ];
+        specialArgs = specialArgs;
+      };
+      # To-do for installations
       nixosConfigurations."live-usb" = nixos.lib.nixosSystem {
         inherit system;
         modules = defaultModules ++ [
