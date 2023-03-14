@@ -20,7 +20,7 @@ in
   wsl = {
     enable = true;
     automountPath = "/mnt";
-    defaultUser = "nixos";
+    defaultUser = "nico";
     startMenuLaunchers = true;
 
     # Enable native Docker support
@@ -36,6 +36,15 @@ in
     useUserPackages = true;
     users."nico" = import ../../configurations/home/nico.nix;
   };
+
+  # Override this to always run fish & workaround fastfetch error
+  programs.fish.shellInit = lib.mkForce ''
+    exec "${pkgs.fish}/bin/fish"
+  '';
+  programs.fish.shellInit = lib.mkForce ''
+    set fish_greeting
+    fastfetch -l nixos
+  '';
 
   # NixOS stuff
   system.stateVersion = "22.11";

@@ -81,9 +81,7 @@
   services.systembus-notify.enable = true;
 
   # Environment
-  environment.Increase Mosh timeout
-    variables = { MOSH_SERVER_NETWORK_TMOUT = "604800"; };
-  };
+  environment.variables = { MOSH_SERVER_NETWORK_TMOUT = "604800"; };
 
   # Enable all the firmwares
   hardware.enableRedistributableFirmware = true;

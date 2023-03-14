@@ -32,7 +32,6 @@
       wget
       whois
     ];
-  };
 
   # Programs & global config
   programs = {
