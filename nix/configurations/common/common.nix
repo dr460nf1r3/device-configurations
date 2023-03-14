@@ -81,34 +81,7 @@
   services.systembus-notify.enable = true;
 
   # Environment
-  environment = {
-    # Packages I always need
-    systemPackages = with pkgs; [
-      age
-      bind
-      bitwarden-cli
-      btop
-      cached-nix-shell
-      cachix
-      curl
-      direnv
-      duf
-      exa
-      jq
-      killall
-      micro
-      nettools
-      nmap
-      nur.repos.federicoschonborn.fastfetch
-      python3
-      sops
-      tldr
-      traceroute
-      ugrep
-      wget
-      whois
-    ];
-    # Increase Mosh timeout
+  environment.Increase Mosh timeout
     variables = { MOSH_SERVER_NETWORK_TMOUT = "604800"; };
   };
 

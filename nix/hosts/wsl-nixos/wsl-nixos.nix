@@ -6,13 +6,11 @@ in
 {
   # Slimmed down configurations
   imports = [
-    ../../configurations/common.nix
-    ../../configurations/locales.nix
-    ../../configurations/nix.nix
-    ../../configurations/shells.nix
-    ../../configurations/sops.nix
-    ../../configurations/theming.nix
-    ../../configurations/users.nix
+    ../../configurations/common/common.nix
+    ../../configurations/common/locales.nix
+    ../../configurations/common/nix.nix
+    ../../configurations/common/shells.nix
+    ../../configurations/common/theming.nix
     ../../overlays/default.nix
     "${modulesPath}/profiles/minimal.nix"
     nixos-wsl.nixosModules.wsl
@@ -32,6 +30,13 @@ in
     docker-desktop.enable = true;
   };
 
+  # Slimmed down user config
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users."nico" = import ../../configurations/home/nico.nix;
+  };
+
   # NixOS stuff
-  system.stateVersion = "22.05";
+  system.stateVersion = "22.11";
 }

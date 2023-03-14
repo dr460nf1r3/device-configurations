@@ -6,6 +6,34 @@
     VISUAL = "${pkgs.micro}/bin/micro";
   };
 
+  # These are the packages I always want in a shell
+  environment.systemPackages = with pkgs; [
+      age
+      bind
+      bitwarden-cli
+      btop
+      cached-nix-shell
+      cachix
+      curl
+      direnv
+      duf
+      exa
+      jq
+      killall
+      micro
+      nettools
+      nmap
+      nur.repos.federicoschonborn.fastfetch
+      python3
+      sops
+      tldr
+      traceroute
+      ugrep
+      wget
+      whois
+    ];
+  };
+
   # Programs & global config
   programs = {
     bash.shellAliases = {
@@ -37,7 +65,7 @@
       "vdir" = "vdir --color=auto";
       "wget" = "wget -c";
     };
-    command-not-found.enable = false;
+    command-not-found.enable = true;
     fish = {
       enable = true;
       vendor = {
